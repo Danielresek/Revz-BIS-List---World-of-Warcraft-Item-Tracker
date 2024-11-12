@@ -1,0 +1,68 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+/* ------------------------- Global Styles ------------------------- */
+
+html {
+  height: 100%;
+  background-color: #1e1e1e;
+}
+
+/* ------------------------- Navbar Container ------------------------- */
+
+nav {
+  max-width: 960px;
+  mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+/* ------------------------- Navbar List ------------------------- */
+
+/* Style for the main list container */
+nav ul {
+  text-align: center;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #333 25%, #333 75%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+/* Style for list items in the navbar */
+nav ul li {
+  display: inline-block;
+}
+
+/* ------------------------- Navbar Links ------------------------- */
+
+/* Style for the anchor links in the navbar */
+nav ul li a {
+  padding: 18px;
+  font-family: "Open Sans";
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.959);
+  font-size: 18px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Hover effect for navbar links */
+nav ul li a:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffda79;
+}
+
+/* ------------------------- Welcome Text ------------------------- */
+
+/* Special styling for "Welcome" text */
+nav ul li.welcome-text span {
+  color: #ffda79;
+  font-weight: bold;
+}
+
+/* General span styles in the navbar */
+nav ul li span {
+  padding: 18px;
+  font-family: "Open Sans";
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.959);
+  font-size: 18px;
+}

@@ -1,0 +1,345 @@
+/* ------------------------- Global Styles ------------------------- */
+
+/* General styling */
+body {
+    background-color: #1e1e1e;
+    font-family: 'Poppins', sans-serif;
+    color: #f4f4f4;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* ------------------------- Header and Navbar ------------------------- */
+
+/* Wrapper container for Logo and Navbar */
+.header-wrapper {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Logo styling */
+.header {
+    margin-bottom: 10px;
+}
+
+/* Navbar styling */
+nav {
+    max-width: 960px;
+    mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+/* ------------------------- Profile Page Containers ------------------------- */
+
+/* Profile wrapper container */
+.profile-wrapper {
+    display: flex;
+    gap: 20px;
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto; /* Center the profile wrapper */
+}
+
+/* ------------------------- Welcome Box Styling ------------------------- */
+
+/* Welcome box container */
+.welcome-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+.welcome-container h1 {
+    color: #ffda79;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+/* ------------------------- Profile Character Container ------------------------- */
+
+/* Profile container styling */
+.profile-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    position: relative;
+}
+
+.profile-container h2 {
+    color: #ffda79;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+/* ------------------------- Character List Styling ------------------------- */
+
+/* Character list styling */
+.character-list {
+    margin-top: 10px;
+}
+
+.character-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+/* Character Icon */
+.character-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.character-info {
+    display: flex;
+    align-items: center;
+}
+
+/* Character Name */
+.character-name {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.character-name:hover {
+    text-decoration: underline;
+}
+
+/* Label for main character */
+.main {
+    font-size: 0.9em;
+    color: #ffda79;
+    margin-left: 5px;
+}
+
+/* ------------------------- Add New Character Button ------------------------- */
+
+.add-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    color: #ffda79;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    color: #ff9933;
+}
+
+/* ------------------------- Modal Styling ------------------------- */
+
+/* General modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+}
+
+/* Modal content styling */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 410px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 10000;
+}
+
+.modal-content h2 {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+/* Modal form elements */
+.modal-content label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+.modal-content input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    height: 40px;
+    margin: 8px 0 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* ------------------------- Save Character Button Styling ------------------------- */
+
+.save-character-btn {
+    margin-top: 20px;
+    height: 45px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.save-character-btn .inner {
+    height: 100%;
+    width: 300%;
+    position: absolute;
+    left: -100%;
+    top: 0;
+    z-index: 0;
+    background: linear-gradient(to right, #bd5602, #c29f02, #bd5602, #c29f02);
+    transition: all 0.4s;
+}
+
+.save-character-btn:hover .inner {
+    left: 0;
+}
+
+.save-character-btn button {
+    height: 100%;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* ------------------------- Close Button Styling ------------------------- */
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #333;
+}
+
+/* ------------------------- Character Action Buttons ------------------------- */
+
+.character-item button {
+    margin-left: auto;
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffda79;
+    color: #333;
+    cursor: pointer;
+}
+
+.character-item button:hover {
+    background-color: #ff9933;
+    color: #fff;
+}
+
+/* Delete button specific styling */
+.character-item .delete-button {
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+.character-item .delete-button:hover {
+    background-color: #a00101;
+    color: #fff;
+}
+
+/* ------------------------- Custom Dropdown Styling ------------------------- */
+
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.dropdown-selected {
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #333;
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+#selectedClassIcon {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+}
+
+#characterClassValue {
+    display: none !important;
+}
+
+.dropdown-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #333;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-option {
+    padding: 10px;
+    color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.dropdown-option:hover {
+    background-color: #444;
+    border: 1px solid #ff9933;
+}
+
+.dropdown-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}

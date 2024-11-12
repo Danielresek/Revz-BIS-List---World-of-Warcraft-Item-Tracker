@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Item List</title>
+    <!-- CSS-stiler for navbar, tabell og logo -->
+    <link rel="stylesheet" href="/stylesheets/navbar.css">
+    <link rel="stylesheet" href="/stylesheets/table.css">
+    <link rel="stylesheet" href="/stylesheets/logo.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+    <!-- Header Wrapper: Inneholder logo og navbar -->
+    <div class="header-wrapper">
+        <!-- Logo -->
+        <div class="header">
+            <img src="/images/logo.png" alt="Logo" class="logo">
+        </div>
+
+        <!-- Inkluder navbar-partial for navigasjon -->
+        <%- include('partials/navbar') %>
+    </div>
+
+    <!-- Wrapper container for karaktervalg og item-tabell -->
+    <div class="wrapper-container">
+        <% if (user) { %>
+            <!-- Hvis brukeren er innlogget, vis karaktervalg og item-funksjoner -->
+
+            <!-- Container for karaktervalg og 'Add Item' knapp -->
+            <div class="character-control-container">
+                <!-- Dropdown for å velge karakter -->
+                <div class="character-dropdown-wrapper">
+                    <label for="characterSelect" class="character-dropdown-label">Select a Character:</label>
+                    <select id="characterSelect" class="character-dropdown">
+                        <option value="">-- Choose a character --</option>
+                        <% characters.forEach(function(character) { %>
+                            <option value="<%= character.id %>"><%= character.name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <!-- Knapp for å legge til et nytt item -->
+                <div class="button-container">
+                    <button class="add-item-btn" onclick="openAddItemModal()">
+                        <div class="inner"></div>
+                        <span>Add Item</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="progress-container">
+                <span id="progressText"></span>
+                <div class="progress-bar">
+                  <div id="progressFill" class="progress-fill"></div>
+                </div>
+              </div>
+              
+              
+
+            <!-- Container for item-tabellen -->
+            <div class="table-container">
+                <div class="table-responsive custom-table-responsive">
+                    <table class="styled-table custom-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Slot</th>
+                                <th scope="col">Boss</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="item-table-body">
+                            <!-- Dynamisk innhold for items settes inn her av JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        <% } else { %>
+            <!-- Hvis brukeren ikke er innlogget, vis meldingen nedenfor -->
+            <p class="login-message">Please log in to create a BIS list and view your items.</p>
+        <% } %>
+    </div>
+
+    <!-- Modal for å legge til et nytt item -->
+    <div id="addItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddItemModal()">&times;</span>
+            <h2>Add New Item</h2>
+
+            <!-- Input for item-navn -->
+            <div class="item-input-container">
+                <label for="itemName">Name:</label>
+                <div class="input-with-icon">
+                    <input type="text" id="itemName" placeholder="Search for item...">
+                    <div id="selectedItemIcon" class="selected-item-icon"></div>
+                </div>
+                <!-- Forslag når man søker etter items -->
+                <div id="suggestions" class="suggestions-box"></div>
+            </div>
+
+            <!-- Input for item-beskrivelse -->
+            <label for="itemDescription">Description:</label>
+            <input type="text" id="itemDescription" placeholder="Description">
+
+            <!-- Dropdown for å velge item slot -->
+            <label for="itemSlot">Slot</label>
+            <select id="itemSlot">
+                <option value="">-- Choose item slot --</option>
+                <option value="Head">Head</option>
+                <option value="Neck">Neck</option>
+                <option value="Shoulders">Shoulders</option>
+                <option value="Back">Back</option>
+                <option value="Chest">Chest</option>
+                <option value="Wrist">Wrist</option>
+                <option value="Hands">Hands</option>
+                <option value="Waist">Waist</option>
+                <option value="Legs">Legs</option>
+                <option value="Feet">Feet</option>
+                <option value="Ring1">Ring 1</option>
+                <option value="Ring2">Ring 2</option>
+                <option value="Trinket1">Trinket 1</option>
+                <option value="Trinket2">Trinket 2</option>
+                <option value="MainHand">Main Hand</option>
+                <option value="OffHand">Off Hand</option>
+                <option value="Relic">Relic</option>
+            </select>
+
+            <!-- Dropdown for å velge boss -->
+            <label for="itemBoss">Boss</label>
+            <select id="itemBoss">
+                <option value="">-- Choose boss --</option>
+                <option value="Shannox">Shannox</option>
+                <option value="LordRyolith">Lord Ryolith</option>
+                <option value="Bethtilac">Beth'tilac</option>
+                <option value="Alysrazor">Alysrazor</option>
+                <option value="Baleroc">Baleroc</option>
+                <option value="MajordomoStaghelm">Majordomo Staghelm</option>
+                <option value="Ragnaros">Ragnaros</option>
+            </select>
+
+            <!-- Knapp for å lagre det nye itemet -->
+            <div class="btn">
+                <div class="inner"></div>
+                <button onclick="saveItem()" type="submit">Save Item</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bekreftelsesmodal for sletting -->
+    <div id="deleteConfirmModal" class="modal">
+        <div class="modal-content">
+        <span class="close" onclick="closeDeleteConfirmModal()">&times;</span>
+        <h2>Are you sure you want to remove this item?</h2>
+        <div class="btn-container">
+            <button onclick="confirmDeleteItem()" class="confirm-btn">Yes, remove</button>
+            <button onclick="closeDeleteConfirmModal()" class="cancel-btn">Cancel</button>
+        </div>
+        </div>
+    </div>
+  
+    <!-- JavaScript-filer -->
+    <script src="/javascripts/home/itemIcons.js"></script>
+    <script type="module" src="/javascripts/home/api.js"></script>
+    <script type="module" src="/javascripts/home/uiHandler.js"></script>
+    <script type="module" src="/javascripts/home/home.js"></script>
+</body>
+
+</html>

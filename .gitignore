@@ -1,0 +1,49 @@
+# Node.js dependencies
+node_modules/
+
+# Sensitive environment variables
+.env
+
+# Config file with sensitive data
+config/config.json
+
+# Ignoring local text files
+todo.md
+startup.txt
+
+# System files
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production build
+/dist
+/out
+
+# Cache files
+.cache/
+.venv/
+*.tmp
+*.temp
+
+# Coverage directory used by testing frameworks like Jest
+coverage/
+
+# Optional npm cache directory
+.npm/
+
+# Ignore npm lock file and Yarn lock file
+package-lock.json
+yarn.lock
+
+# Ignore files related to OS or IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp

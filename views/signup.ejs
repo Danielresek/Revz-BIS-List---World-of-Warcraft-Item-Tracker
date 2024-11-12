@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+
+    <!-- CSS-filer for styling -->
+    <link rel="stylesheet" href="/stylesheets/logo.css">
+    <link rel="stylesheet" href="/stylesheets/form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <!-- Logo for nettsiden -->
+    <div class="header">
+        <img src="/images/logo.png" alt="Logo" class="logo">
+    </div>
+
+    <!-- Wrapper for selve registreringsskjemaet -->
+    <div class="center">
+        <div class="container">
+            <!-- Lukkeknapp for å returnere til hovedsiden -->
+            <a href="/" class="close-btn fas fa-times"></a>
+            <div class="text">
+                Signup
+            </div>
+
+            <!-- Vis feilmeldinger hvis det oppstår feil under registrering -->
+            <% if (typeof error !== "undefined") { %>
+                <p style="color: red; text-align: center;"><%= error %></p>
+            <% } %>
+
+            <!-- Registreringsskjema -->
+            <form action="/signup" method="POST">
+                <!-- Input for brukernavn -->
+                <div class="data">
+                    <label>Username</label>
+                    <input type="text" name="username" required>
+                </div>
+
+                <!-- Input for e-postadresse -->
+                <div class="data">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <!-- Input for passord -->
+                <div class="data">
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                </div>
+
+                <!-- Knapp for å registrere en ny bruker -->
+                <div class="btn">
+                    <div class="inner"></div>
+                    <button type="submit">Signup</button>
+                </div>
+
+                <!-- Lenke til innloggingssiden hvis brukeren allerede har en konto -->
+                <div class="signup-link">
+                    Already have an account? <a href="/login">Login now</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

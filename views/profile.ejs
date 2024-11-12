@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <!-- CSS-filer for styling -->
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <link rel="stylesheet" href="/stylesheets/navbar.css">
+    <link rel="stylesheet" href="/stylesheets/logo.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- JavaScript-filer for jQuery og Select2 (brukt i dropdowns) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header Wrapper -->
+    <div class="header-wrapper">
+        <!-- Logo -->
+        <div class="header">
+            <img src="/images/logo.png" alt="Logo" class="logo">
+        </div>
+
+        <!-- Inkluder navigasjonsmeny -->
+        <%- include('partials/navbar') %>
+    </div>
+
+    <!-- Wrapper-container for profilinnhold -->
+    <div class="profile-wrapper">
+        <!-- Velkomstmelding til brukeren -->
+        <div class="welcome-container">
+            <h1>Welcome, <%= user.username %>!</h1>
+        </div>
+
+        <!-- Karakterboks som viser brukerens karakterer -->
+        <div class="profile-container">
+            <h2>Your Characters</h2>
+
+            <!-- Liste over brukerens karakterer -->
+            <div class="character-list">
+                <% characters.forEach(character => { %>
+                <div class="character-item" id="character-<%= character.id %>">
+                    <div class="character-info">
+                        <!-- Vis karakterens klasseikon og navn -->
+                        <img src="<%= character.classIconUrl %>" alt="Character Icon" class="character-icon">
+                        <span class="character-name"><%= character.name %></span>
+                    </div>
+                    <div class="character-buttons">
+                        <!-- Knapp for å åpne modal for å redigere karakter -->
+                        <button onclick="openEditCharacterModal('<%= character.id %>', '<%= character.name %>')">Edit</button>
+                        <!-- Knapp for å slette karakter -->
+                        <button class="delete-button" onclick="deleteCharacter('<%= character.id %>')">Delete</button>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+
+            <!-- Knapp for å legge til en ny karakter (åpner modal) -->
+            <button class="add-button" onclick="openAddCharacterModal()">+</button>
+        </div>
+    </div>
+
+    <!-- Modal for å legge til ny karakter -->
+    <div id="addCharacterModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddCharacterModal()">&times;</span>
+            <h2>Add New Character</h2>
+
+            <!-- Skjema for å legge til ny karakter -->
+            <form id="addCharacterForm">
+                <!-- Input for navn på karakteren -->
+                <label for="characterName">Character Name:</label>
+                <input type="text" id="characterName" name="name" required />
+
+                <!-- Custom dropdown for valg av karakterens klasse -->
+                <label for="characterClass">Character Class:</label>
+                <div class="custom-dropdown" id="characterClassDropdown">
+                    <div class="dropdown-selected" id="dropdownSelected">
+                        -- Choose class --
+                    </div>
+                    <div class="dropdown-options" id="dropdownOptions">
+                        <!-- Alternativer for karakterklasser med ikoner -->
+                        <div class="dropdown-option" data-value="death-knight" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_deathknight.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_deathknight.jpg" alt="Death Knight" class="dropdown-icon"> Death Knight
+                        </div>
+                        <div class="dropdown-option" data-value="hunter" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_hunter.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_hunter.jpg" alt="Hunter" class="dropdown-icon"> Hunter
+                        </div>
+                        <div class="dropdown-option" data-value="paladin" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_paladin.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_paladin.jpg" alt="Paladin" class="dropdown-icon"> Paladin
+                        </div>
+                        <div class="dropdown-option" data-value="mage" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_mage.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_mage.jpg" alt="Mage" class="dropdown-icon"> Mage
+                        </div>
+                        <div class="dropdown-option" data-value="warrior" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_warrior.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_warrior.jpg" alt="Warrior" class="dropdown-icon"> Warrior
+                        </div>
+                        <div class="dropdown-option" data-value="warlock" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_warlock.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_warlock.jpg" alt="Warlock" class="dropdown-icon"> Warlock
+                        </div>
+                        <div class="dropdown-option" data-value="shaman" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_shaman.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_shaman.jpg" alt="Shaman" class="dropdown-icon"> Shaman
+                        </div>
+                        <div class="dropdown-option" data-value="druid" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_druid.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_druid.jpg" alt="Druid" class="dropdown-icon"> Druid
+                        </div>
+                        <div class="dropdown-option" data-value="rogue" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_rogue.jpg">
+                            <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_rogue.jpg" alt="Rogue" class="dropdown-icon"> Rogue
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skjulte inputfelter for å lagre valgt klasse og ikon-URL -->
+                <input type="hidden" id="characterClassValue" name="characterClass" />
+                <input type="hidden" id="classIconUrl" name="classIconUrl" />
+
+                <!-- Knapp for å lagre ny karakter -->
+                <div class="save-character-btn">
+                    <div class="inner"></div>
+                    <button type="submit">Save Character</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for å redigere eksisterende karakter -->
+    <div id="editCharacterModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditCharacterModal()">&times;</span>
+            <h2>Edit Character</h2>
+
+            <!-- Skjema for å redigere en eksisterende karakter -->
+            <form id="editCharacterForm">
+                <!-- Input for nytt navn på karakteren -->
+                <label for="editCharacterName">Character Name:</label>
+                <input type="text" id="editCharacterName" name="name" required>
+
+                <!-- Knapp for å lagre endringer -->
+                <div class="save-character-btn">
+                    <div class="inner"></div>
+                    <button type="button" onclick="saveCharacterChanges()">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript-filer for profilfunksjonalitet -->
+    <script type="module" src="/javascripts/profile/characterApi.js"></script>
+    <script type="module" src="/javascripts/profile/uiHandler.js"></script>
+    <script type="module" src="/javascripts/profile/profile.js"></script>
+
+</body>
+
+</html>

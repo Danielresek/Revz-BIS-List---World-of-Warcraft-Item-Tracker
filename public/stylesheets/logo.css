@@ -1,0 +1,11 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Sentrerer logoen horisontalt */
+    padding: 10px;
+}
+
+.logo {
+    height: 200px; /* Juster høyden på bildet etter ønske */
+    width: auto;
+}

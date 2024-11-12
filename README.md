@@ -119,7 +119,7 @@ The project is organized to make it easy to expand and maintain:
 - **Improve and Secure User Registration and Login**: Implement enhanced security features and better user experience for authentication.
 - **Expansion-Specific Features:**: Allow users to choose which expansion/version of the game they are playing, so items, bosses, and locations can be adapted accordingly.
 - **Share BIS List and Progress:**: Let users share their BIS lists and progress with others.
-- **Styling and Feature Enhancements:**: Improve the styling and add new features to enhance the user experience.
+- **Expand Services:**: Extend the application to include integrations such as Warcraftlogs, boss guides, and boss loot tables.
 
 ## Contributions
 

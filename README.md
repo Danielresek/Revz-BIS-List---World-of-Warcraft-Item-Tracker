@@ -6,6 +6,8 @@
 
 **Resern BIS List** is a web application created for World of Warcraft players who want to keep track of their "Best in Slot" (BIS) gear for their characters. The application allows users to add characters, add BIS items for each character, and mark which items have been collected. This provides players with an easy way to visualize their progression for gear collection.
 
+_Please note that this project is in its early stages and is still under active development. The application will soon be live, hosted by me, but if you'd like to download and run your own local version, feel free to do so._
+
 ### How MyBIS Looks
 
 **Home Page:**

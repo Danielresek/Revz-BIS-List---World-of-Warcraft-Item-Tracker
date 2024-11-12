@@ -15,7 +15,7 @@
 ![Profile Page](public/images/profile_screenshot.png)
 
 **Add Item Page:**
-![Add Item Page](public/images/addItem.png)
+![Add Item Page](public/images/addItem_screenshot.png)
 
 **Login Page:**
 ![Login Page](public/images/login_screenshot.png)
@@ -41,9 +41,9 @@ The project is organized to make it easy to expand and maintain:
 
 - **config/**: Contains configuration files used for setting up database migrations. This includes details like database connection parameters used by the migration tool to create and modify tables.
 
-- **data/**: Contains JSON files with data used during development. `db.json`, for instance, contains a list of all BIS items that players can add, which is used for searching specific items when pressing the "Add items" button in the application.
+- **data/**: Contains a list of all BIS items that players can add, which is used for searching specific items when pressing the "Add items" button in the application.
 
-- **middleware/**: Contains middleware functions used in the application for authentication or other purposes. For example, `auth.js` handles user login and verification using Passport.js to authenticate users.
+- **middleware/**: Contains middleware functions used in the application for authentication. For example, `auth.js` handles user login and verification using Passport.js to authenticate users.
 
 - **migrations/**: Contains migration files used to create, update, or remove tables in the database. This is especially useful during development when the structure of the database needs to be adjusted.
 
@@ -68,6 +68,7 @@ The project is organized to make it easy to expand and maintain:
    ```
 
 2. **Install dependencies**
+
    Navigate to the project folder and run:
 
    ```bash
@@ -78,14 +79,30 @@ The project is organized to make it easy to expand and maintain:
 
    - Create a MySQL database called `myBis`.
 
-4. **Environment Variables**
+4. **Configuration Setup**
 
-   - Create a `.env` file and add database name, username, and password to connect to the MySQL database.
+   The project requires a configuration file to connect to the database and manage different environments. An example configuration file is provided in `config/configExample.json`.
 
-5. **Start the server**
+   To set up your own configuration:
+
+   1. **Copy the example file**:
+
+      ```bash
+      cp config/configExample.json config/config.json
+      ```
+
+   2. **Edit `config/config.json`** and replace the placeholder values (e.g., `"your_password_here"`) with your own settings.
+
+5. **Environment Variables**
+
+   - Create a `.env` file in the root directory and add the necessary environment variables such as the database name, username, and password to connect to the MySQL database.
+
+6. **Start the server**
+
    ```bash
    npm start
    ```
+
    The server will run at `http://localhost:3000`.
 
 ## Usage

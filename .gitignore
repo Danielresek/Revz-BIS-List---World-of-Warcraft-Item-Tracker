@@ -18,8 +18,6 @@ startup.txt
 logs/
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Production build
 /dist
@@ -37,13 +35,5 @@ coverage/
 # Optional npm cache directory
 .npm/
 
-# Ignore npm lock file and Yarn lock file
-package-lock.json
-yarn.lock
-
-# Ignore files related to OS or IDE
+# Ignore files related to IDE
 .vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-*.swp

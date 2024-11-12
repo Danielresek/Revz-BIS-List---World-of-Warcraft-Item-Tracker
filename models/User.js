@@ -25,7 +25,6 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Relasjoner
   User.associate = (models) => {
     User.hasMany(models.Character, { foreignKey: "user_id" });
   };

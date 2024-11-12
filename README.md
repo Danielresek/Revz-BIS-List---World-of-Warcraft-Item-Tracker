@@ -8,7 +8,7 @@
 
 _Please note that this project is in its early stages and is still under active development. The application will soon be live, hosted by me, but if you'd like to download and run your own local version, feel free to do so._
 
-### How MyBIS Looks
+### How Resern BIS List Looks
 
 **Home Page:**
 ![Home Page](public/images/home_screenshot.png)
@@ -125,9 +125,19 @@ The project is organized to make it easy to expand and maintain:
 
 Contributions are welcome! Whether it's suggestions for improvements, bug fixes, or new features, feel free to create a pull request or open an issue to get started.
 
+## Credit
+
+Resern BIS List is originally developed by [Daniel Rese](https://github.com/Danielresek). If you reuse or share this project, please give proper credit.
+
 ## License
 
-This project is open source and licensed under the MIT License.
+MIT License
+
+Copyright (c) 2024 Daniel Rese
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 ## Contact
 

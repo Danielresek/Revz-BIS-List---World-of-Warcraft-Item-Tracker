@@ -5,14 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-
-    <!-- CSS-filer for styling -->
     <link rel="stylesheet" href="/stylesheets/profile.css">
     <link rel="stylesheet" href="/stylesheets/navbar.css">
     <link rel="stylesheet" href="/stylesheets/logo.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
-    <!-- JavaScript-filer for jQuery og Select2 (brukt i dropdowns) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </head>
@@ -26,65 +23,65 @@
             <img src="/images/logo.png" alt="Logo" class="logo">
         </div>
 
-        <!-- Inkluder navigasjonsmeny -->
+        <!-- Include navigation menu -->
         <%- include('partials/navbar') %>
     </div>
 
-    <!-- Wrapper-container for profilinnhold -->
+    <!-- Wrapper container for profile content -->
     <div class="profile-wrapper">
-        <!-- Velkomstmelding til brukeren -->
+        <!-- Welcome message for the user -->
         <div class="welcome-container">
             <h1>Welcome, <%= user.username %>!</h1>
         </div>
 
-        <!-- Karakterboks som viser brukerens karakterer -->
+        <!-- Character box displaying the user's characters -->
         <div class="profile-container">
             <h2>Your Characters</h2>
 
-            <!-- Liste over brukerens karakterer -->
+            <!-- List of the user's characters -->
             <div class="character-list">
                 <% characters.forEach(character => { %>
                 <div class="character-item" id="character-<%= character.id %>">
                     <div class="character-info">
-                        <!-- Vis karakterens klasseikon og navn -->
+                        <!-- Display character class icon and name -->
                         <img src="<%= character.classIconUrl %>" alt="Character Icon" class="character-icon">
                         <span class="character-name"><%= character.name %></span>
                     </div>
                     <div class="character-buttons">
-                        <!-- Knapp for å åpne modal for å redigere karakter -->
+                        <!-- Button to open modal for editing character -->
                         <button onclick="openEditCharacterModal('<%= character.id %>', '<%= character.name %>')">Edit</button>
-                        <!-- Knapp for å slette karakter -->
+                        <!-- Button to delete character -->
                         <button class="delete-button" onclick="deleteCharacter('<%= character.id %>')">Delete</button>
                     </div>
                 </div>
                 <% }) %>
             </div>
 
-            <!-- Knapp for å legge til en ny karakter (åpner modal) -->
+            <!-- Button to add a new character (opens modal) -->
             <button class="add-button" onclick="openAddCharacterModal()">+</button>
         </div>
     </div>
 
-    <!-- Modal for å legge til ny karakter -->
+    <!-- Modal to add a new character -->
     <div id="addCharacterModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddCharacterModal()">&times;</span>
             <h2>Add New Character</h2>
 
-            <!-- Skjema for å legge til ny karakter -->
+            <!-- Form to add a new character -->
             <form id="addCharacterForm">
-                <!-- Input for navn på karakteren -->
+                <!-- Input for character name -->
                 <label for="characterName">Character Name:</label>
                 <input type="text" id="characterName" name="name" required />
 
-                <!-- Custom dropdown for valg av karakterens klasse -->
+                <!-- Custom dropdown for selecting character class -->
                 <label for="characterClass">Character Class:</label>
                 <div class="custom-dropdown" id="characterClassDropdown">
                     <div class="dropdown-selected" id="dropdownSelected">
                         -- Choose class --
                     </div>
                     <div class="dropdown-options" id="dropdownOptions">
-                        <!-- Alternativer for karakterklasser med ikoner -->
+                        <!-- Options for character classes with icons -->
                         <div class="dropdown-option" data-value="death-knight" data-icon-url="https://wow.zamimg.com/images/wow/icons/large/classicon_deathknight.jpg">
                             <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_deathknight.jpg" alt="Death Knight" class="dropdown-icon"> Death Knight
                         </div>
@@ -115,11 +112,11 @@
                     </div>
                 </div>
 
-                <!-- Skjulte inputfelter for å lagre valgt klasse og ikon-URL -->
+                <!-- Hidden input fields to store selected class and icon URL -->
                 <input type="hidden" id="characterClassValue" name="characterClass" />
                 <input type="hidden" id="classIconUrl" name="classIconUrl" />
 
-                <!-- Knapp for å lagre ny karakter -->
+                <!-- Button to save the new character -->
                 <div class="save-character-btn">
                     <div class="inner"></div>
                     <button type="submit">Save Character</button>
@@ -128,19 +125,19 @@
         </div>
     </div>
 
-    <!-- Modal for å redigere eksisterende karakter -->
+    <!-- Modal to edit an existing character -->
     <div id="editCharacterModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeEditCharacterModal()">&times;</span>
             <h2>Edit Character</h2>
 
-            <!-- Skjema for å redigere en eksisterende karakter -->
+            <!-- Form to edit an existing character -->
             <form id="editCharacterForm">
-                <!-- Input for nytt navn på karakteren -->
+                <!-- Input for new character name -->
                 <label for="editCharacterName">Character Name:</label>
                 <input type="text" id="editCharacterName" name="name" required>
 
-                <!-- Knapp for å lagre endringer -->
+                <!-- Button to save changes -->
                 <div class="save-character-btn">
                     <div class="inner"></div>
                     <button type="button" onclick="saveCharacterChanges()">Save Changes</button>
@@ -149,7 +146,7 @@
         </div>
     </div>
 
-    <!-- JavaScript-filer for profilfunksjonalitet -->
+    <!-- JavaScript files for profile functionality -->
     <script type="module" src="/javascripts/profile/characterApi.js"></script>
     <script type="module" src="/javascripts/profile/uiHandler.js"></script>
     <script type="module" src="/javascripts/profile/profile.js"></script>

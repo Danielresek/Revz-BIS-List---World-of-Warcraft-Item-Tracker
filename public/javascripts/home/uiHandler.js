@@ -49,7 +49,7 @@ export function openEditItemModal(item) {
   // Update modal save button to call updateItem function
   const saveButton = document.querySelector(".btn button");
   saveButton.innerText = "Update Item";
-  saveButton.onclick = window.updateItem; // Oppdaterer funksjonen som knappen skal kalle
+  saveButton.onclick = window.updateItem;
 
   // Set modal title and display it
   document.getElementById("addItemModal").style.display = "block";

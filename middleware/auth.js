@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
-const { User } = require("../models"); // Pass på at pathen stemmer med modellen din
+const { User } = require("../models");
 const validator = require("validator");
 
 module.exports = function (passport) {
@@ -43,11 +43,11 @@ module.exports = function (passport) {
   });
 };
 
-// Registrer ny bruker
+// Register a new user
 async function signup(req, res) {
   const { username, email, password } = req.body;
 
-  // Sjekk om e-posten er gyldig
+  // Validate email format
   if (!validator.isEmail(email)) {
     return res.status(400).send("Please enter a valid email address.");
   }
@@ -67,12 +67,12 @@ async function signup(req, res) {
   }
 }
 
-// Middleware for å sjekke innlogging
+// Middleware to ensure the user is authenticated
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated() && req.session.userId) {
     return next();
   } else {
-    res.redirect("/login"); // Omdiriger brukeren til login-siden hvis ikke innlogget
+    res.redirect("/login");
   }
 }
 

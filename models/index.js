@@ -10,15 +10,12 @@ const sequelize = new Sequelize(
   {
     host: process.env.HOST,
     dialect: process.env.DIALECT,
-    logging: console.log, // Legg til logging for SQL-spørringer
+    logging: console.log,
   }
 );
 const db = {};
 
-// Start med en enkel test for å se om dette kjører
-console.log("Loading models...");
-
-// Last inn alle modellene
+// Load all models
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (
@@ -34,6 +31,7 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
+// Associate models if associations are defined
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     console.log(`Associating model: ${modelName}`);
@@ -44,6 +42,7 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// Attempt to connect and synchronize models
 console.log("Attempting to connect and sync models...");
 (async () => {
   try {

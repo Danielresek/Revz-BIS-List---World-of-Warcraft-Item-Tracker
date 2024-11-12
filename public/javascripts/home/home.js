@@ -10,7 +10,7 @@ import {
   closeDeleteConfirmModal,
   addItemToTable,
   updateRowToReceived,
-  undoReceivedItem, // Sørg for at denne importeres fra uiHandler.js
+  undoReceivedItem,
 } from "./uiHandler.js";
 
 // References to important DOM elements used throughout the script
@@ -102,43 +102,27 @@ window.confirmDeleteItem = async () => {
 
 // Function to render items in the table
 function renderItems(items) {
-  // Clear table before rendering
   tableBody.innerHTML = "";
-
-  // Sort items to ensure "received" items are at the bottom
   items.sort((a, b) => (a.status === "received" ? 1 : -1));
-
-  // Add each item to the table
   items.forEach((item) => {
     addItemToTable(item, tableBody);
-
-    // Sjekk om item har status som mottatt og legg til visuell indikasjon
     const row = document.querySelector(`tr[data-item-id="${item.id}"]`);
     if (item.status === "received" && row) {
       updateRowToReceived(row, tableBody);
     }
   });
-
-  // Oppdater progress baren etter at alle elementene er rendret
   updateProgressBar(items);
 }
 
 // Function to update the progress bar based on collected items
 function updateProgressBar(items) {
-  // Calculate how many items are received
   const receivedItems = items.filter(
     (item) => item.status === "received"
   ).length;
-  const totalItems = items.length; // Total antall elementer er basert på items-arrayet
-
-  // Calculate the percentage of received items
+  const totalItems = items.length;
   const progressPercentage =
     totalItems > 0 ? (receivedItems / totalItems) * 100 : 0;
-
-  // Update the width of the progress bar fill
   progressFill.style.width = `${progressPercentage}%`;
-
-  // Update the progress text to reflect received items
   progressText.textContent = `${receivedItems} of ${totalItems} items collected (${Math.round(
     progressPercentage
   )}%)`;
@@ -234,19 +218,16 @@ window.receivedItem = async (id) => {
 
     const row = document.querySelector(`tr[data-item-id="${id}"]`);
     if (row) {
-      // Legg til glow-effekten før elementet blir re-rendret
       row.classList.add("glow-effect");
 
-      // Bruk requestAnimationFrame for å gi tid til animasjonen
       requestAnimationFrame(() => {
         setTimeout(() => {
           row.classList.remove("glow-effect");
           const characterId = characterDropdown.value;
-          // Hent og oppdater tabellen og progress bar
           fetchItems(characterId).then((items) => {
             renderItems(items);
           });
-        }, 500); // La animasjonen vare i 500ms før vi oppdaterer tabellen
+        }, 500);
       });
     }
   } catch (error) {

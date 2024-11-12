@@ -29,7 +29,6 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Definer relasjonen i associate-metoden
   Item.associate = (models) => {
     Item.belongsTo(models.Character, { foreignKey: "character_id" });
     models.Character.hasMany(Item, { foreignKey: "character_id" });

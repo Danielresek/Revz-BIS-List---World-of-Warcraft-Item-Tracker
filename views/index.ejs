@@ -5,35 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Item List</title>
-    <!-- CSS-stiler for navbar, tabell og logo -->
     <link rel="stylesheet" href="/stylesheets/navbar.css">
     <link rel="stylesheet" href="/stylesheets/table.css">
     <link rel="stylesheet" href="/stylesheets/logo.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
 
 <body>
-    <!-- Header Wrapper: Inneholder logo og navbar -->
+    <!-- Header Wrapper: Contains logo and navbar -->
     <div class="header-wrapper">
         <!-- Logo -->
         <div class="header">
             <img src="/images/logo.png" alt="Logo" class="logo">
         </div>
 
-        <!-- Inkluder navbar-partial for navigasjon -->
+        <!-- navbar-partial  -->
         <%- include('partials/navbar') %>
     </div>
 
-    <!-- Wrapper container for karaktervalg og item-tabell -->
+    <!-- Wrapper container for character selection and item table -->
     <div class="wrapper-container">
         <% if (user) { %>
-            <!-- Hvis brukeren er innlogget, vis karaktervalg og item-funksjoner -->
+            <!-- If the user is logged in, display character selection and item functions -->
 
-            <!-- Container for karaktervalg og 'Add Item' knapp -->
+            <!-- Container for character selection and 'Add Item' button -->
             <div class="character-control-container">
-                <!-- Dropdown for å velge karakter -->
+                <!-- Dropdown to select character -->
                 <div class="character-dropdown-wrapper">
                     <label for="characterSelect" class="character-dropdown-label">Select a Character:</label>
                     <select id="characterSelect" class="character-dropdown">
@@ -44,7 +44,7 @@
                     </select>
                 </div>
 
-                <!-- Knapp for å legge til et nytt item -->
+                <!-- Button to add a new item -->
                 <div class="button-container">
                     <button class="add-item-btn" onclick="openAddItemModal()">
                         <div class="inner"></div>
@@ -54,7 +54,7 @@
             </div>
           
 
-            <!-- Container for item-tabellen -->
+            <!-- Container for item table -->
             <div class="table-container">
                 <!-- Progress bar -->
             <div class="progress-container">
@@ -76,40 +76,40 @@
                             </tr>
                         </thead>
                         <tbody id="item-table-body">
-                            <!-- Dynamisk innhold for items settes inn her av JavaScript -->
+                            <!-- Dynamic content for items will be inserted here by JavaScript -->
                         </tbody>
                     </table>
                 </div>
             </div>
 
         <% } else { %>
-            <!-- Hvis brukeren ikke er innlogget, vis meldingen nedenfor -->
+            <!-- If the user is not logged in, display the message below -->
             <p class="login-message">Please log in to create a BIS list and view your items.</p>
         <% } %>
     </div>
 
-    <!-- Modal for å legge til et nytt item -->
+    <!-- Modal to add a new item -->
     <div id="addItemModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddItemModal()">&times;</span>
             <h2>Add New Item</h2>
 
-            <!-- Input for item-navn -->
+            <!-- Input for item name -->
             <div class="item-input-container">
                 <label for="itemName">Name:</label>
                 <div class="input-with-icon">
                     <input type="text" id="itemName" placeholder="Search for item...">
                     <div id="selectedItemIcon" class="selected-item-icon"></div>
                 </div>
-                <!-- Forslag når man søker etter items -->
+                <!-- Suggestions when searching for items -->
                 <div id="suggestions" class="suggestions-box"></div>
             </div>
 
-            <!-- Input for item-beskrivelse -->
+            <!-- Input for item description -->
             <label for="itemDescription">Description:</label>
             <input type="text" id="itemDescription" placeholder="Description">
 
-            <!-- Dropdown for å velge item slot -->
+            <!-- Dropdown to select item slot -->
             <label for="itemSlot">Slot</label>
             <select id="itemSlot">
                 <option value="">-- Choose item slot --</option>
@@ -132,7 +132,7 @@
                 <option value="Relic">Relic</option>
             </select>
 
-            <!-- Dropdown for å velge boss -->
+            <!-- Dropdown to select boss -->
             <label for="itemBoss">Boss</label>
             <select id="itemBoss">
                 <option value="">-- Choose boss --</option>
@@ -145,7 +145,7 @@
                 <option value="Ragnaros">Ragnaros</option>
             </select>
 
-            <!-- Knapp for å lagre det nye itemet -->
+            <!-- Button to save the new item -->
             <div class="btn">
                 <div class="inner"></div>
                 <button onclick="saveItem()" type="submit">Save Item</button>
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <!-- Bekreftelsesmodal for sletting -->
+    <!-- Confirmation modal for item deletion -->
     <div id="deleteConfirmModal" class="modal">
         <div class="modal-content">
         <span class="close" onclick="closeDeleteConfirmModal()">&times;</span>
@@ -164,8 +164,7 @@
         </div>
         </div>
     </div>
-  
-    <!-- JavaScript-filer -->
+    <!-- JavaScript files -->
     <script src="/javascripts/home/itemIcons.js"></script>
     <script type="module" src="/javascripts/home/api.js"></script>
     <script type="module" src="/javascripts/home/uiHandler.js"></script>

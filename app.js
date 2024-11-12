@@ -7,68 +7,68 @@ const session = require("express-session");
 const passport = require("passport");
 require("dotenv").config();
 
-// Importer ruter
+// Import routes
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const characterRoutes = require("./routes/characters");
 const itemRoutes = require("./routes/items");
 
-// Importer database og initier modeller
+// Import database and initialize models
 const db = require("./models");
 
-// Konfigurer Passport
+// Configure Passport
 require("./middleware/auth")(passport);
 
 const app = express();
 
-// Konfigurer view engine
+// Configure view engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-// Middleware for statiske filer
+// Middleware for static files
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 app.use("/data", express.static(path.join(__dirname, "data")));
 
-// Loggføring og body parsing
+// Logging and body parsing
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Sesjonshåndtering
+// Session handling
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "din_hemmelige_nøkkel", // Sikrere med miljøvariabel
+    secret: process.env.SESSION_SECRET || "your_secret_key",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }, // 'true' hvis du bruker HTTPS
+    cookie: { secure: false },
   })
 );
 
-// Passport.js konfigurasjon
+// Passport.js configuration
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Middleware for å gjøre innloggingsstatus tilgjengelig i EJS
+// Middleware to make login status available in EJS
 app.use((req, res, next) => {
   res.locals.loggedIn = req.isAuthenticated();
   res.locals.username = req.user ? req.user.username : "";
   next();
 });
 
-// Ruter
+// Routes
 app.use("/", indexRouter);
 app.use("/", usersRouter);
 app.use("/characters", characterRoutes);
 app.use("/items", itemRoutes);
 
-// Håndter 404-feil
+// Handle 404 errors
 app.use((req, res, next) => {
   next(createError(404));
 });
 
-// Feilhåndtering
+// Error handling
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};

@@ -4,58 +4,58 @@
 <head>
     <meta charset="utf-8">
     <title>Login</title>
-    <!-- CSS-filer for logo, skjema og Font Awesome -->
     <link rel="stylesheet" href="/stylesheets/logo.css">
     <link rel="stylesheet" href="/stylesheets/form.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
 <body>
-    <!-- Header med logo -->
+    <!-- Header with logo -->
     <div class="header">
         <img src="/images/logo.png" alt="Logo" class="logo">
     </div>
 
-    <!-- Login-senter container -->
+    <!-- Login center container -->
     <div class="center">
         <div class="container">
-            <!-- Lukkeknapp for modal-stil navigasjon -->
+            <!-- Close button for modal-style navigation -->
             <a href="/" class="close-btn fas fa-times"></a>
 
-            <!-- Tekst for login header -->
+            <!-- Login header text -->
             <div class="text">Login</div>
 
-            <!-- Vise feilmelding hvis innlogging mislykkes -->
+            <!-- Display error message if login fails -->
             <% if (typeof error !== "undefined") { %>
             <p style="color: red; text-align: center;"><%= error %></p>
             <% } %>
 
-            <!-- Skjema for login -->
+            <!-- Login form -->
             <form action="/login" method="POST">
-                <!-- Input for e-post eller telefonnummer -->
+                <!-- Input for email or phone number -->
                 <div class="data">
                     <label>Email or Phone</label>
                     <input type="text" name="email" required>
                 </div>
 
-                <!-- Input for passord -->
+                <!-- Input for password -->
                 <div class="data">
                     <label>Password</label>
                     <input type="password" name="password" required>
                 </div>
 
-                <!-- Glemt passord-link (kan senere implementeres med funksjonalitet) -->
+                <!-- Forgot password link (functionality can be implemented later) -->
                 <div class="forgot-pass">
                     <a href="#">Forgot Password?</a>
                 </div>
 
-                <!-- Login-knapp -->
+                <!-- Login button -->
                 <div class="btn">
                     <div class="inner"></div>
                     <button type="submit">LOGIN</button>
                 </div>
 
-                <!-- Link til signup-siden -->
+                <!-- Link to signup page -->
                 <div class="signup-link">
                     Not a member? <a href="/signup">Signup now</a>
                 </div>

@@ -7,9 +7,7 @@ export async function deleteCharacter(characterId) {
   const id = parseInt(characterId, 10);
 
   if (isNaN(id)) {
-    console.error("Invalid character ID:", characterId);
-    alert("Invalid character ID. Could not delete.");
-    return;
+    return { success: false, message: "Invalid character ID" };
   }
 
   try {
@@ -18,16 +16,17 @@ export async function deleteCharacter(characterId) {
     });
 
     if (response.ok) {
-      console.log(`Character with ID ${id} deleted successfully.`);
-      location.reload();
+      return { success: true };
     } else {
       const errorText = await response.text();
-      console.error("Failed to delete character:", errorText);
-      alert("Failed to delete character");
+      return { success: false, message: errorText };
     }
   } catch (error) {
     console.error("Error occurred while deleting character:", error);
-    alert("An error occurred while deleting the character");
+    return {
+      success: false,
+      message: "An error occurred while deleting the character",
+    };
   }
 }
 
@@ -44,12 +43,19 @@ export async function addCharacter(name, characterClass, classIconUrl) {
 
     const data = await response.json();
     if (data.success) {
-      console.log("Character added successfully:", data);
-      location.reload();
+      return { success: true, data: data.character };
     } else {
-      console.error("Failed to add character");
+      return {
+        success: false,
+        message: "Failed to add character. Please try again.",
+      };
     }
   } catch (error) {
     console.error("Error:", error);
+    return {
+      success: false,
+      message:
+        "An error occurred while adding the character. Please try again.",
+    };
   }
 }

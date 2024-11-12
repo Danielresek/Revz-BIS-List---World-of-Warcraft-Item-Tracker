@@ -207,7 +207,11 @@ export async function undoReceivedItem(id, tableBody) {
 
     if (!response.ok) {
       console.error("Error updating item status");
-      alert("Failed to undo received status. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Failed to undo received status. Please try again.",
+      });
       return;
     }
 
@@ -222,6 +226,10 @@ export async function undoReceivedItem(id, tableBody) {
     }
   } catch (error) {
     console.error("Error undoing item status:", error);
-    alert("An error occurred while undoing item status. Please try again.");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "An error occurred while undoing item status. Please try again.",
+    });
   }
 }

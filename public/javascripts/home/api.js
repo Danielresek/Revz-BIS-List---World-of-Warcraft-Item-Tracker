@@ -16,6 +16,7 @@ export async function fetchItems(characterId) {
   }
 }
 
+// Add item
 export async function saveItem(item) {
   try {
     const response = await fetch("/items", {
@@ -26,19 +27,51 @@ export async function saveItem(item) {
       body: JSON.stringify(item),
     });
     if (response.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Item saved successfully!",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
       return await response.json();
     } else {
       console.error("Error saving item");
-      alert("Failed to save item. Please choose a character first.");
+      Swal.fire({
+        icon: "error",
+        title: "Failed to save item. Please choose a character first.",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
       return null;
     }
   } catch (error) {
     console.error("Error saving item:", error);
-    alert("An error occurred while saving the item. Please try again.");
+    Swal.fire({
+      icon: "error",
+      title: "An error occurred while saving the item. Please try again.",
+      background: "#333333",
+      color: "#ffda79",
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
     return null;
   }
 }
 
+// Update item
 export async function updateItem(id, item) {
   try {
     const response = await fetch(`/items/${id}`, {
@@ -49,34 +82,97 @@ export async function updateItem(id, item) {
       body: JSON.stringify(item),
     });
     if (response.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Item updated successfully!",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
       return true;
     } else {
       console.error("Error updating item");
-      alert("Failed to update item. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update item. Please try again.",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
       return false;
     }
   } catch (error) {
     console.error("Error updating item:", error);
-    alert("An error occurred while updating the item. Please try again.");
+    Swal.fire({
+      icon: "error",
+      title: "An error occurred while updating the item. Please try again.",
+      background: "#333333",
+      color: "#ffda79",
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
     return false;
   }
 }
 
+// Delete item
 export async function deleteItem(deleteItemId) {
   try {
     const response = await fetch(`/items/${deleteItemId}`, {
       method: "DELETE",
     });
     if (response.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Item deleted successfully!",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
       return true;
     } else {
       console.error("Error deleting item");
-      alert("Failed to delete item. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Failed to delete item. Please try again.",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
       return false;
     }
   } catch (error) {
     console.error("Error:", error);
-    alert("An error occurred while deleting the item. Please try again.");
+    Swal.fire({
+      icon: "error",
+      title: "An error occurred while deleting the item. Please try again.",
+      background: "#333333",
+      color: "#ffda79",
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
     return false;
   }
 }

@@ -13,6 +13,29 @@ export function closeAddCharacterModal() {
   document.getElementById("addCharacterModal").style.display = "none";
 }
 
+// Function to open the "Edit Character" modal
+export function openEditCharacterModal(characterId, characterName) {
+  closeAllModals(); // Lukk alle åpne modaler
+  const editModal = document.getElementById("editCharacterModal");
+
+  if (editModal) {
+    editModal.style.display = "block";
+
+    // Fyll modalen med dataene til karakteren
+    const characterNameInput = document.getElementById("editCharacterName");
+    if (characterNameInput) {
+      characterNameInput.value = characterName;
+    } else {
+      console.error("Edit Character modal elements not found.");
+    }
+
+    // Lagre characterId i en data-attributt for senere bruk
+    editModal.setAttribute("data-character-id", characterId);
+  } else {
+    console.error("Edit Character modal not found.");
+  }
+}
+
 // Function to close all modals on the page
 export function closeAllModals() {
   const modals = document.querySelectorAll(".modal");

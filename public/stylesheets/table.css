@@ -578,9 +578,9 @@
 }
 
 .progress-bar {
-  width: 89%; /* Gjør progressbaren kortere */
+  width: 95%; /* Gjør progressbaren kortere */
   margin: 0 auto; /* Sentere progressbaren */
-  background-color: #333; /* Justere farge for å matche temaet */
+  background-color: #585858; /* Justere farge for å matche temaet */
   border-radius: 15px; /* Redusere radius for et mer polert utseende */
   overflow: hidden;
   height: 20px; /* Litt høyere for bedre synlighet */

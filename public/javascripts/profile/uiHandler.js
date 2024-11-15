@@ -51,20 +51,6 @@ export function setupDropdown() {
   const characterClassValue = document.getElementById("characterClassValue");
   const classIconUrlInput = document.getElementById("classIconUrl");
 
-  console.log("Initializing dropdown...");
-  if (!dropdownSelected) {
-    console.error("dropdownSelected element not found");
-  }
-  if (!dropdownOptions) {
-    console.error("dropdownOptions element not found");
-  }
-  if (!characterClassValue) {
-    console.error("characterClassValue element not found");
-  }
-  if (!classIconUrlInput) {
-    console.error("classIconUrl element not found");
-  }
-
   // Open/close the dropdown when clicking on the selected element
   dropdownSelected.addEventListener("click", function (e) {
     e.stopPropagation();

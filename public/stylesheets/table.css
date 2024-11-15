@@ -1,22 +1,22 @@
 /* table.css */
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
-/* Knapp for å legge til et element */
+/* Button for adding an item */
 .add-item-btn {
     margin-top: 20px;
     height: 45px;
-    width: 200px; /* Sett bredde, juster hvis nødvendig */
+    width: 200px;
     position: relative;
     overflow: hidden;
     background: none;
     border: none;
     cursor: pointer;
-    border-radius: 10px; /* Runde kanter */
+    border-radius: 10px; 
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Gradient bakgrunn som skal bevege seg */
+/* Gradient background for the button */
 .add-item-btn .inner {
     height: 100%;
     width: 300%;
@@ -26,15 +26,15 @@
     z-index: 0;
     background: linear-gradient(to right, #bd5602, #c29f02, #bd5602, #c29f02);
     transition: all 0.4s;
-    border-radius: 10px; /* Runde kanter for gradienten */
+    border-radius: 10px; 
 }
 
-/* Flytter gradienten inn når du holder over */
+/* Move the gradient in when hovered */
 .add-item-btn:hover .inner {
     left: 0;
 }
 
-/* Knappen som vises over gradienten */
+/* The button text shown over the gradient */
 .add-item-btn button {
     height: 100%;
     width: 100%;
@@ -46,10 +46,9 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
-    z-index: 1; /* Sikrer at teksten vises over gradienten */
+    z-index: 1; 
     cursor: pointer;
 }
-
 
 /* Table container styling */
 .table-container {
@@ -66,7 +65,7 @@
 .add-item-btn {
     margin-top: 20px;
     height: 45px;
-    width: 200px; /* Justert bredde */
+    width: 200px; 
     position: relative;
     overflow: hidden;
     background: none;
@@ -105,6 +104,7 @@
     z-index: 1;
 }
 
+/* Login message styling */
 .login-message {
     color: #ffda79;
     text-align: center;
@@ -120,12 +120,12 @@
     font-family: 'Roboto', sans-serif;
     color: #f4f4f4;
     margin-bottom: 20px;
-    text-align: center; /* Sentrer tekst horisontalt */
+    text-align: center;
 }
 
 .styled-table thead tr {
     background-color: #585858;
-    text-align: center; /* Sentrer overskrift horisontalt */
+    text-align: center;
     color: #ffda79;
 }
 
@@ -133,8 +133,8 @@
 .styled-table td {
     padding: 12px 15px;
     border: 1px solid #444;
-    text-align: center; /* Sentrer innhold horisontalt */
-    vertical-align: middle; /* Sentrer innhold vertikalt */
+    text-align: center;
+    vertical-align: middle;
 }
 
 .styled-table tbody tr {
@@ -213,8 +213,7 @@
 }
 
 .modal-content {
-    background: 
-    #fff;
+    background: #fff;
     width: 410px;
     padding: 30px;
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
@@ -250,10 +249,10 @@
 }
 
 #itemDescription {
-    width: 95%; /* Sørg for at det matcher andre inputfelter */
+    width: 95%; 
 }
 
-/* Knapp for modal */
+/* Modal button styling */
 .modal-content .btn {
     margin-top: 20px;
     height: 45px;
@@ -304,15 +303,14 @@
     color: #000;
 }
 
-
-/* Dropdown-styling for å velge karakter */
+/* Dropdown styling for selecting character */
 .character-dropdown-wrapper {
-    margin-bottom: 20px; /* Juster avstand for å få luft rundt dropdownen */
+    margin-bottom: 20px; 
 }
 
 .character-dropdown-label {
     font-size: 1.2em;
-    color: #ffda79; /* Gyllen farge som matcher resten av designet */
+    color: #ffda79; 
     margin-right: 10px;
 }
 
@@ -320,14 +318,14 @@
     padding: 10px;
     font-size: 1em;
     border-radius: 5px;
-    border: 1px solid #ccc; /* Lys grå kant */
-    background-color: #333; /* Mørk bakgrunn som matcher temaet */
-    color: #f4f4f4; /* Lys tekst for bedre kontrast */
+    border: 1px solid #ccc; 
+    background-color: #333; 
+    color: #f4f4f4; 
 }
 
 .character-dropdown:focus {
-    border-color: #ff9933; /* Gyllen farge når dropdownen er i fokus */
-    outline: none; /* Fjern standard blått fokus */
+    border-color: #ff9933; 
+    outline: none; 
 }
 
 .character-control-container {
@@ -335,13 +333,13 @@
     align-items: center;
     justify-content: space-between;
     max-width: 800px;
-    margin: 20px auto; /* Midtstill containeren på siden */
+    margin: 20px auto; 
     padding: 10px;
 }
 
 .character-dropdown-wrapper {
     flex: 1;
-    margin-right: 20px; /* Legg litt avstand mellom dropdown og knappen */
+    margin-right: 20px; 
 }
 
 .character-dropdown-label {
@@ -367,253 +365,228 @@
     border: 2px solid #868686;
     border-image-slice: 1;
     box-shadow: 0 4px 8px rgb(0, 0, 0);
-    background-color: #333; /* Mørk bakgrunnsfarge som matcher dropdown */
-    color: #f4f4f4; /* Lys tekst for bedre kontrast */
-    max-height: 150px; /* Begrens høyden, slik at den ikke blir for stor */
-    overflow-y: auto;  /* Legg til rullefelt hvis det er for mange forslag */
+    background-color: #333; 
+    color: #f4f4f4; 
+    max-height: 150px; 
+    overflow-y: auto;  
     position: absolute;
-    width: 85%; /* Samme bredde som inputfeltet, minus padding */
-    z-index: 1000; /* Sørg for at boksen vises over annet innhold */
+    width: 85%; 
+    z-index: 1000; 
     border-radius: 8px;
     padding: 5px;
-    margin-top: -6px; /* Legg til margin for å unngå overlapping med inputfeltet */
-    display: none; /* Start med å skjule suggestions-boksen */
+    margin-top: -6px; 
+    display: none; 
 }
   
-  /* Styling for hver enkelt forslag */
-  .suggestion-item {
+/* Styling for each suggestion */
+.suggestion-item {
     padding: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
     border-radius: 3px;
-    border: 1px solid transparent; /* Gjør kantlinjen usynlig til den blir valgt */
+    border: 1px solid transparent; 
     transition: background-color 0.2s ease, border-color 0.2s ease;
-  }
-  
-  /* Lysere farge ved hover for bedre visuell tilbakemelding, lignende dropdown-effekt */
-  .suggestion-item:hover {
-    background-color: #444; /* Lysere farge ved hover */
-    border: 1px solid #ff9933; /* Oransje kant ved hover, matcher dropdown */
-  }
-  
-  .suggestion-item img {
+}
+
+/* Lighter color on hover for better visual feedback, similar to dropdown effect */
+.suggestion-item:hover {
+    background-color: #444; 
+    border: 1px solid #ff9933; 
+}
+
+.suggestion-item img {
     margin-right: 10px;
     border-radius: 3px;
-  }
-  
-  .suggestion-item:hover {
-    background-color: #444; /* Lysere farge ved hover for bedre visuell tilbakemelding */
-  }
-  
-  .suggestion-item img {
-    margin-right: 10px;
-    border-radius: 3px;
-  }
-  
-  .selected-item-icon {
+}
+
+.selected-item-icon {
     display: inline-block;
     margin-left: 10px;
     vertical-align: middle;
     position: absolute;
-    right: 10px; /* Plasser ikonet helt til høyre inni input-feltet */
+    right: 10px; 
     width: 30px;
     height: 28px;
-  }
+}
 
-  /* Container for å legge input med ikon */
+/* Container to include input with icon */
 .input-with-icon {
     position: relative;
     display: flex;
     align-items: center;
-  }
-  
-  .input-with-icon input[type="text"] {
-    padding-right: 40px; /* Juster padding for å gjøre plass til ikonet */
+}
+
+.input-with-icon input[type="text"] {
+    padding-right: 40px;
     width: 100%;
-  }
-  
-  .selected-item-icon img {
+}
+
+.selected-item-icon img {
     width: 90%;
     height: auto;
-  }
+}
 
-  /* ---------------------- delete confirmation modal -----------------------*/
+/* ---------------------- delete confirmation modal -----------------------*/
 
-  /* Styling for delete confirmation modal */
+/* Styling for delete confirmation modal */
 .modal-content .btn-container {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-  }
-  
-  .confirm-btn {
+}
+
+.confirm-btn {
     background-color: #ff4d4d;
     border: none;
     padding: 10px 20px;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .confirm-btn:hover {
+}
+
+.confirm-btn:hover {
     background-color: #a00101;
-  }
-  
-  .cancel-btn {
+}
+
+.cancel-btn {
     background-color: #ccc;
     border: none;
     padding: 10px 20px;
     color: #333;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .cancel-btn:hover {
+}
+
+.cancel-btn:hover {
     background-color: #999;
-  }
+}
 
 /* ------------------------ Table buttons ------------------------ */
 
-/* Generell styling for alle knapper i tabellen */
+/* General styling for all buttons in the table */
 .action-button {
-  padding: 0; /* Fjern padding for å kun vise ikonene */
-  margin-right: 8px; /* Gir alle knappene litt mellomrom til høyre */
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px; /* Øk fontstørrelsen for å gjøre ikonene mer synlige */
-  background: none; /* Fjern bakgrunnsfargen for å kun vise ikonene */
-  cursor: pointer;
-  border: none; /* Ingen kantlinje */
+    padding: 0; 
+    margin-right: 8px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    background: none; 
+    cursor: pointer;
+    border: none; 
 }
 
-/* Spesifikk styling for hver knapp */
+/* Specific styling for each button */
 .received-button {
-  color: #4CAF50; /* Grønn farge for "Received"-ikonet */
+    color: #4CAF50; 
 }
 
 .edit-button {
-  color: #ffa500; /* Oransje farge for "Edit"-ikonet */
+    color: #ffa500; 
 }
 
 .delete-button {
-  color: #ff4d4d; /* Rød farge for "Delete"-ikonet */
+    color: #ff4d4d; 
 }
 
 .undo-button {
-  color: #2196F3; /* Blå farge for "Undo"-ikonet */
+    color: #2196F3; 
 }
 
 .undo-button:hover {
-  color: #1976D2; /* Mørkere blå ved hover */
+    color: #1976D2; 
 }
-
-
 
 /* ------------------------ Received effects ------------------------ */
 
-/* Glow Effekt */
+/* Glow effect */
 .glow-effect {
-  animation: glow 2s ease-out;
-  z-index: 0; /* Lavere z-index for å unngå overlapp med andre elementer */
-  position: relative;
+    animation: glow 2s ease-out;
+    z-index: 0;
+    position: relative;
 }
 
 @keyframes glow {
-  0% {
-      box-shadow: 0 0 10px #bd5602, 0 0 20px #ffda79;
-  }
-  100% {
-      box-shadow: 0 0 0px transparent;
-  }
+    0% {
+        box-shadow: 0 0 10px #bd5602, 0 0 20px #ffda79;
+    }
+    100% {
+        box-shadow: 0 0 0px transparent;
+    }
 }
 
-/* Checkmark Animasjon */
+/* Checkmark animation */
 .checkmark {
-  display: inline-block;
-  color: #00ff00;
-  font-size: 1.4em;
-  animation: checkmarkAnimation 1s ease-out;
+    display: inline-block;
+    color: #00ff00;
+    font-size: 1.4em;
+    animation: checkmarkAnimation 1s ease-out;
 }
 
 @keyframes checkmarkAnimation {
-  0% {
-      opacity: 0;
-      transform: scale(0.5);
-  }
-  100% {
-      opacity: 1;
-      transform: scale(1);
-  }
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-/* Gjennomsiktig Rad */
+/* Transparent row */
 .item-row.completed {
-  background-color: #2a2a2a;
-  opacity: 0.6;
+    background-color: #2a2a2a;
+    opacity: 0.6;
 }
 
 .item-row .received-button {
-  display: none;
+    display: none;
 }
 
 .item-row .received-text {
-  display: inline-block;
-  color: #00ff00;
-  font-weight: bold;
+    display: inline-block;
+    color: #00ff00;
+    font-weight: bold;
 }
 
-/* Spesifikk hover for rader med glow-effekt */
+/* Specific hover for rows with glow effect */
 .styled-table tbody tr.glow-effect:hover {
-  background-color: #2a2a2a; /* Fikser hover-effekt når glow er aktiv */
-  box-shadow: none; /* Unngå ekstra skygge ved hover */
+    background-color: #2a2a2a;
+    box-shadow: none;
 }
 
 /* ------------------------ Progress bar ------------------------ */
 
 .progress-container {
-  margin-bottom: 20px;
-  text-align: left;
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .progress-bar {
-  width: 95%; /* Gjør progressbaren kortere */
-  margin: 0 auto; /* Sentere progressbaren */
-  background-color: #585858; /* Justere farge for å matche temaet */
-  border-radius: 15px; /* Redusere radius for et mer polert utseende */
-  overflow: hidden;
-  height: 20px; /* Litt høyere for bedre synlighet */
-  position: relative;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Gir dybde */
+    width: 95%;
+    margin: 0 auto;
+    background-color: #585858;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 20px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .progress-fill {
-  height: 100%;
-  background: linear-gradient(to right, #ff8800, #22dd88); /* Mer behagelig gradient */
-  width: 0%; /* Start tom */
-  transition: width 0.5s ease-in-out; /* Gjør overgangen jevnere */
+    height: 100%;
+    background: linear-gradient(to right, #ff8800, #22dd88);
+    width: 0%;
+    transition: width 0.5s ease-in-out;
 }
 
 #progressText {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 0.9em; /* Litt mindre skriftstørrelse for bedre visuell balanse */
-  color: #ffda79; /* Lysere tekstfarge for bedre kontrast */
-  text-align: center; /* Sentere teksten for bedre estetikk */
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #ffda79;
+    text-align: center;
 }
-
-
-
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  

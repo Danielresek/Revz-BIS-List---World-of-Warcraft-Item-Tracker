@@ -167,13 +167,55 @@ window.updateItem = async () => {
         .getAttribute("data-icon-id") || null,
   };
 
-  const isSuccess = await updateItem(editingItemId, item);
-  if (isSuccess) {
-    closeAddItemModal();
-    const characterId = characterDropdown.value;
-    const items = await fetchItems(characterId);
-    renderItems(items);
-    updateProgressBar(items);
+  try {
+    const isSuccess = await updateItem(editingItemId, item);
+    if (isSuccess) {
+      closeAddItemModal();
+
+      const characterId = characterDropdown.value;
+      const items = await fetchItems(characterId);
+      renderItems(items);
+      updateProgressBar(items);
+
+      Swal.fire({
+        icon: "success",
+        title: "Item updated successfully!",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update item",
+        text: "An error occurred while updating the item. Please try again.",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
+    }
+  } catch (error) {
+    console.error("Error updating item:", error);
+    Swal.fire({
+      icon: "error",
+      title: "An error occurred",
+      text: "An error occurred while updating the item. Please try again.",
+      background: "#333333",
+      color: "#ffda79",
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
   }
 };
 
@@ -213,7 +255,18 @@ window.receivedItem = async (id) => {
 
     if (!response.ok) {
       console.error("Error updating item status");
-      alert("Failed to mark item as received. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Failed to mark item as received",
+        text: "Please try again.",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
       return;
     }
 
@@ -230,17 +283,71 @@ window.receivedItem = async (id) => {
           });
         }, 500);
       });
+
+      // SweetAlert2 for success feedback when an item is marked as received
+      Swal.fire({
+        icon: "success",
+        title: "Item marked as received!",
+        background: "#333333",
+        color: "#ffda79",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
     }
   } catch (error) {
     console.error("Error marking item as received:", error);
-    alert("An error occurred while updating item status. Please try again.");
+    Swal.fire({
+      icon: "error",
+      title: "An error occurred",
+      text: "An error occurred while updating item status. Please try again.",
+      background: "#333333",
+      color: "#ffda79",
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
   }
 };
 
 // Use the imported function from uiHandler.js for undoReceivedItem
 window.undoReceivedItem = async (id) => {
-  await undoReceivedItem(id, tableBody);
-  const characterId = characterDropdown.value;
-  const items = await fetchItems(characterId);
-  updateProgressBar(items);
+  try {
+    await undoReceivedItem(id, tableBody);
+
+    const characterId = characterDropdown.value;
+    const items = await fetchItems(characterId);
+
+    updateProgressBar(items);
+
+    Swal.fire({
+      icon: "success",
+      title: "Item status has been undone!",
+      background: "#333333",
+      color: "#ffda79",
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
+  } catch (error) {
+    console.error("Error undoing item status:", error);
+    Swal.fire({
+      icon: "error",
+      title: "An error occurred",
+      text: "An error occurred while undoing the item status. Please try again.",
+      background: "#333333",
+      color: "#ffda79",
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
+  }
 };

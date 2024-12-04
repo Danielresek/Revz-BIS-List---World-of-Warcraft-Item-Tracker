@@ -2,7 +2,7 @@ const express = require("express");
 const { Item } = require("../models");
 const router = express.Router();
 const auth = require("../middleware/auth");
-const { Op } = require("sequelize"); // Sørg for å importere Op for søkefunksjonen
+const { Op } = require("sequelize");
 
 // GET all items for a specific character
 router.get("/:characterId", auth.ensureAuthenticated, async (req, res) => {

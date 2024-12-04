@@ -35,7 +35,7 @@ _Please note that this project is in its early stages and is still under active 
 ## Technologies Used
 
 - **Backend**: Node.js with Express.js as the framework.
-- **Database**: MySQL is used to store users, characters, and items.
+- **Database**: Azure SQL Database is used to store users, characters, and items.
 - **Frontend**: HTML, CSS, JavaScript, and EJS (Embedded JavaScript) are used for the user interface.
 - **JavaScript Functions**: JavaScript files for each page (home.js, profile.js, etc.) contain functionality for handling DOM manipulation, API calls, and the progress bar.
 
@@ -118,10 +118,10 @@ The project is organized to make it easy to expand and maintain:
 
 ## Future Development
 
-- **Improve and Secure User Registration and Login**: Implement enhanced security features and better user experience for authentication.
-- **Expansion-Specific Features:**: Allow users to choose which expansion/version of the game they are playing, so items, bosses, and locations can be adapted accordingly.
-- **Share BIS List and Progress:**: Let users share their BIS lists and progress with others.
-- **Expand Services:**: Extend the application to include integrations such as Warcraftlogs, boss guides, and boss loot tables.
+- **Improve and Secure User Registration and Login:** Implement enhanced security features and better user experience for authentication.
+- **Expansion-Specific Features:** Allow users to choose which expansion/version of the game they are playing, so items, bosses, and locations can be adapted accordingly.
+- **Share BIS List and Progress:** Let users share their BIS lists and progress with others.
+- **Expand Services:** Extend the application to include integrations such as Warcraftlogs, boss guides, and boss loot tables.
 
 ## Contributions
 

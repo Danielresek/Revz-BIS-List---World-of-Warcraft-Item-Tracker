@@ -83,10 +83,18 @@
                 </div>
             </div>
 
-        <% } else { %>
-            <!-- If the user is not logged in, display the message below -->
-            <p class="login-message">Please log in to create a BIS list and view your items.</p>
-        <% } %>
+            <% } else { %>
+                <!-- If the user is not logged in, display the message below -->
+                <p class="login-message">
+                    Please log in to create a BIS list and view your items.
+                    <br>
+                    If you just want to take a look, you can log in with:
+                    <br>
+                    <strong>Email:</strong> test@test.com
+                    <br>
+                    <strong>Password:</strong> test
+                </p>
+            <% } %>
     </div>
 
     <!-- Modal to add a new item -->

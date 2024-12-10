@@ -45,8 +45,6 @@ The project is organized to make it easy to expand and maintain:
 
 - **config/**: Contains configuration files used for setting up database migrations. This includes details like database connection parameters used by the migration tool to create and modify tables.
 
-- **data/**: Contains a list of all BIS items that players can add, which is used for searching specific items when pressing the "Add items" button in the application.
-
 - **middleware/**: Contains middleware functions used in the application for authentication. For example, `auth.js` handles user login and verification using Passport.js to authenticate users.
 
 - **migrations/**: Contains migration files used to create, update, or remove tables in the database. This is especially useful during development when the structure of the database needs to be adjusted.
@@ -81,27 +79,24 @@ The project is organized to make it easy to expand and maintain:
 
 3. **Set up the database**
 
-   - Create a MySQL database called `myBis`.
+   Create a Azure SQL database called `resernbis`.
 
-4. **Configuration Setup**
+4. **Environment Variables**
 
-   The project requires a configuration file to connect to the database and manage different environments. An example configuration file is provided in `config/configExample.json`.
+   Create a .env file in the root directory and add the following environment variables:
 
-   To set up your own configuration:
+   ```bash
+   DB_SERVER="your-database-server.database.windows.net"
+   DB_NAME="resernbis"
+   DB_USER="your-database-username"
+   DB_PASSWORD="your-database-password"
+   DIALECT="mssql"
+   SESSION_SECRET="your-session-secret"
+   ```
 
-   1. **Copy the example file**:
+   Replace the placeholder values with your own database details and secure keys.
 
-      ```bash
-      cp config/configExample.json config/config.json
-      ```
-
-   2. **Edit `config/config.json`** and replace the placeholder values (e.g., `"your_password_here"`) with your own settings.
-
-5. **Environment Variables**
-
-   - Create a `.env` file in the root directory and add the necessary environment variables such as the database name, username, and password to connect to the MySQL database.
-
-6. **Start the server**
+5. **Start the server**
 
    ```bash
    npm start

@@ -43,7 +43,7 @@ _Please note that this project is in its early stages and is still under active 
 
 The project is organized to make it easy to expand and maintain:
 
-- **config/**: Contains configuration files used for setting up database migrations. This includes details like database connection parameters used by the migration tool to create and modify tables.
+- **data/**: Contains a list of all BIS items that players can add, which is used for searching specific items when pressing the "Add items" button in the application.
 
 - **middleware/**: Contains middleware functions used in the application for authentication. For example, `auth.js` handles user login and verification using Passport.js to authenticate users.
 

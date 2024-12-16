@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const query = itemNameInput.value.toLowerCase();
 
     // Hide suggestions if input is too short
-    if (query.length < 2) {
+    if (query.length < 1) {
       suggestionsBox.innerHTML = "";
       suggestionsBox.style.display = "none";
       return;

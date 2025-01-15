@@ -4,18 +4,20 @@ const fs = require("fs");
 const path = require("path");
 const basename = path.basename(__filename);
 
-// Create a new instance of Sequelize with Azure SQL configuration
+// Create a new instance of Sequelize with MySQL configuration
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
+  process.env.DATABASE_NAME, // Bruk DATABASE_NAME
+  process.env.DATABASE_USER, // Bruk DATABASE_USER
+  process.env.DATABASE_PASSWORD, // Bruk DATABASE_PASSWORD
   {
-    host: process.env.DB_SERVER,
-    port: process.env.DB_PORT,
-    dialect: process.env.DIALECT,
+    host: process.env.DATABASE_HOST, // Bruk DATABASE_HOST
+    port: process.env.DATABASE_PORT, // Bruk DATABASE_PORT
+    dialect: process.env.DIALECT, // Bruk DIALECT
     dialectOptions: {
-      options: {
-        encrypt: true,
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+        ca: fs.readFileSync("C:\\Users\\danie\\Skrivebord\\SSL\\ca.pem"),
       },
     },
     logging: console.log,
@@ -56,7 +58,7 @@ console.log("Attempting to connect and sync models...");
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log("Connected to Azure SQL database successfully!");
+    console.log("Connected to MySQL database successfully!");
     await sequelize.sync({ force: false });
     console.log("Database synchronized!");
   } catch (error) {

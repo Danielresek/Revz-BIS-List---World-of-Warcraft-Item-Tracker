@@ -6,13 +6,13 @@ const basename = path.basename(__filename);
 
 // Create a new instance of Sequelize with MySQL configuration
 const sequelize = new Sequelize(
-  process.env.DATABASE_NAME, // Bruk DATABASE_NAME
-  process.env.DATABASE_USER, // Bruk DATABASE_USER
-  process.env.DATABASE_PASSWORD, // Bruk DATABASE_PASSWORD
+  process.env.DATABASE_NAME,
+  process.env.DATABASE_USER,
+  process.env.DATABASE_PASSWORD,
   {
-    host: process.env.DATABASE_HOST, // Bruk DATABASE_HOST
-    port: process.env.DATABASE_PORT, // Bruk DATABASE_PORT
-    dialect: process.env.DIALECT, // Bruk DIALECT
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    dialect: process.env.DIALECT,
     dialectOptions: {
       ssl: {
         require: true,

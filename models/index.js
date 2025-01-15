@@ -54,7 +54,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // Attempt to connect and synchronize the models
-console.log("Attempting to connect and sync models...");
+console.log("Attempting to connect and sync models.");
 (async () => {
   try {
     await sequelize.authenticate();

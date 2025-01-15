@@ -4,25 +4,44 @@ const fs = require("fs");
 const path = require("path");
 const basename = path.basename(__filename);
 
-// Create a new instance of Sequelize with MySQL configuration
+// Create a new instance of Sequelize with Azure SQL configuration
 const sequelize = new Sequelize(
   process.env.DATABASE_NAME,
-  process.env.DATABASE_USER,
-  process.env.DATABASE_PASSWORD,
+  process.env.ADMIN_USERNAME,
+  process.env.ADMIN_PASSWORD,
   {
-    host: process.env.DATABASE_HOST,
-    port: process.env.DATABASE_PORT,
+    host: process.env.HOST,
+    host: process.env.DB_SERVER,
+    port: process.env.DB_PORT,
     dialect: process.env.DIALECT,
     dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-        ca: process.env.DATABASE_SSL_CA,
+      options: {
+        encrypt: true,
       },
     },
     logging: console.log,
   }
 );
+
+// Create a new instance of Sequelize with Azure SQL configuration
+/*
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_SERVER,
+    port: process.env.DB_PORT,
+    dialect: process.env.DIALECT,
+    dialectOptions: {
+      options: {
+        encrypt: true,
+      },
+    },
+    logging: console.log,
+  }
+);
+*/
 
 const db = {};
 
@@ -54,11 +73,11 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // Attempt to connect and synchronize the models
-console.log("Attempting to connect and sync models.");
+console.log("Attempting to connect and sync models...");
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log("Connected to MySQL database successfully!");
+    console.log("Connected to Azure SQL database successfully!");
     await sequelize.sync({ force: false });
     console.log("Database synchronized!");
   } catch (error) {

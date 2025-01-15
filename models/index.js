@@ -17,7 +17,7 @@ const sequelize = new Sequelize(
       ssl: {
         require: true,
         rejectUnauthorized: false,
-        ca: fs.readFileSync("C:\\Users\\danie\\Skrivebord\\SSL\\ca.pem"),
+        ca: process.env.DATABASE_SSL_CA,
       },
     },
     logging: console.log,

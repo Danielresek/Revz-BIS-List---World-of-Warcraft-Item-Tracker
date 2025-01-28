@@ -6,26 +6,6 @@ const basename = path.basename(__filename);
 
 // Create a new instance of Sequelize with Azure SQL configuration
 const sequelize = new Sequelize(
-  process.env.DATABASE_NAME,
-  process.env.ADMIN_USERNAME,
-  process.env.ADMIN_PASSWORD,
-  {
-    host: process.env.HOST,
-    host: process.env.DB_SERVER,
-    port: process.env.DB_PORT,
-    dialect: process.env.DIALECT,
-    dialectOptions: {
-      options: {
-        encrypt: true,
-      },
-    },
-    logging: console.log,
-  }
-);
-
-// Create a new instance of Sequelize with Azure SQL configuration
-/*
-const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASSWORD,
@@ -41,7 +21,6 @@ const sequelize = new Sequelize(
     logging: console.log,
   }
 );
-*/
 
 const db = {};
 

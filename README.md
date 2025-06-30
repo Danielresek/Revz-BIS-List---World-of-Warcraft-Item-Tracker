@@ -58,8 +58,6 @@ The project is organized to make it easy to expand and maintain:
 
 - **routes/**: Contains all API endpoints for managing various functionalities, such as users, characters, and items. These files define how the server responds to HTTP requests for creating, reading, updating, and deleting resources.
 
-- **services/**: Contains logic that is shared across different parts of the application, such as database queries or business logic that doesn't belong strictly to models or route handling. This helps maintain better code organization and reuse.
-
 - **views/**: Contains EJS files used to dynamically generate HTML pages. This includes templates for all the pages that the user sees, such as the home page, profile page, and different modals used for adding or editing items.
 
 ## Installation

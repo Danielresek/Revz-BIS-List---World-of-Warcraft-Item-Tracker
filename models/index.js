@@ -4,35 +4,28 @@ const fs = require("fs");
 const path = require("path");
 const basename = path.basename(__filename);
 
-// Create a new instance of Sequelize with Azure SQL configuration
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_SERVER,
-    port: process.env.DB_PORT,
-    dialect: process.env.DIALECT,
-    dialectOptions: {
-      options: {
-        encrypt: true,
-      },
+console.log("🗄️ Initializing database...");
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: process.env.DB_DIALECT || "postgres",
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
     },
-    logging: console.log,
-  }
-);
+  },
+  logging: process.env.NODE_ENV === "development" ? console.log : false,
+});
 
 const db = {};
 
-// Load all models
 fs.readdirSync(__dirname)
-  .filter((file) => {
-    return (
+  .filter(
+    (file) =>
       file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-    );
-  })
+  )
   .forEach((file) => {
-    console.log(`Loading model file: ${file}`);
+    console.log(`➡️ Loading model file: ${file}`);
     const model = require(path.join(__dirname, file))(
       sequelize,
       Sequelize.DataTypes
@@ -40,10 +33,9 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
-// Associate models whose associations are defined
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
-    console.log(`Associating model: ${modelName}`);
+    console.log(`🔗 Associating model: ${modelName}`);
     db[modelName].associate(db);
   }
 });
@@ -51,16 +43,17 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// Attempt to connect and synchronize the models
-console.log("Attempting to connect and sync models...");
 (async () => {
   try {
+    console.log("🗄️ Connecting to the database...");
     await sequelize.authenticate();
-    console.log("Connected to Azure SQL database successfully!");
-    await sequelize.sync({ force: false });
-    console.log("Database synchronized!");
+    console.log("✅ Database connection established!");
+
+    console.log("🔧 Syncing models...");
+    await sequelize.sync({ alter: true });
+    console.log("✅ Models synchronized!");
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    console.error("❌ Unable to connect to the database:", error);
   }
 })();
 

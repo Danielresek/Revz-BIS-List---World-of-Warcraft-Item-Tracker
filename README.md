@@ -1,16 +1,16 @@
 ![MyBIS Logo](public/images/logo.png)
 
-# Resern BIS List - World of Warcraft Item Tracker
+# Revz BIS List - World of Warcraft Item Tracker
 
 ## About the Project
 
-**Resern BIS List** is a web application created for World of Warcraft players who want to keep track of their "Best in Slot" (BIS) gear for their characters. The application allows users to add characters, add BIS items for each character, and mark which items have been collected. This provides players with an easy way to visualize their progression for gear collection.
+**Revz BIS List** is a web application created for World of Warcraft players who want to track their **Best in Slot (BIS)** gear for their characters. The app allows users to add characters, manage BIS items, and mark items as collected. This gives players an easy way to visualize their progression towards full BIS gear.
 
-The application is now live and available at `www.resernbis.com`. Feel free to visit and try it out!
+The application is live and available at **www.revzbis.com**. Feel free to visit and try it out!
 
-_Please note that this project is in its early stages and is still under active development. If you'd like to download and run your own local version, feel free to do so._
+_Please note that this project is still under active development. You are welcome to download, contribute, or run your own local version._
 
-### How Resern BIS List Looks
+### Preview Screenshots
 
 **Home Page:**
 ![Home Page](public/images/home_screenshot.png)
@@ -26,18 +26,19 @@ _Please note that this project is in its early stages and is still under active 
 
 ## Features
 
-- **User Registration and Login**: Users can register, log in, and view their own list of characters.
-- **Character Management**: Users can add, edit, and delete their characters with class-related icons.
-- **Item Management**: Users can add, edit, and delete BIS items for each character.
-- **Mark as Collected**: Users can mark items as collected, which updates the status and provides visual feedback.
-- **Progress Display**: A progress bar shows how many items the user has collected for a selected character.
+- 🔐 **User Registration & Login** – Secure authentication system.
+- 🎭 **Character Management** – Add, edit, and delete characters with class-specific icons.
+- 🎒 **Item Management** – Manage BIS items for each character.
+- ✅ **Track Progress** – Mark items as collected; visual progress bar shows BIS completion.
 
 ## Technologies Used
 
-- **Backend**: Node.js with Express.js as the framework.
-- **Database**: Azure SQL Database is used to store users, characters, and items.
-- **Frontend**: HTML, CSS, JavaScript, and EJS (Embedded JavaScript) are used for the user interface.
-- **JavaScript Functions**: JavaScript files for each page (home.js, profile.js, etc.) contain functionality for handling DOM manipulation, API calls, and the progress bar.
+- **Backend:** Node.js with Express.js
+- **Database:** PostgreSQL (hosted on Render)
+- **Frontend:** EJS, HTML, CSS, and JavaScript
+- **ORM:** Sequelize
+- **Authentication:** Supertokens
+- **Hosting:** Render
 
 ## Directory Structure
 
@@ -45,7 +46,7 @@ The project is organized to make it easy to expand and maintain:
 
 - **data/**: Contains a list of all BIS items that players can add, which is used for searching specific items when pressing the "Add items" button in the application.
 
-- **middleware/**: Contains middleware functions used in the application for authentication. For example, `auth.js` handles user login and verification using Passport.js to authenticate users.
+- **middleware/**: Contains middleware functions used in the application for authentication. For example, `auth.js` handles user login and verification using Supertokens to authenticate users.
 
 - **migrations/**: Contains migration files used to create, update, or remove tables in the database. This is especially useful during development when the structure of the database needs to be adjusted.
 
@@ -66,7 +67,7 @@ The project is organized to make it easy to expand and maintain:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/Danielresek/Resern-BIS-List---World-of-Warcraft-Item-Tracker
+   git clone https://github.com/Danielresek/revz-BIS-List---World-of-Warcraft-Item-Tracker.git
    ```
 
 2. **Install dependencies**
@@ -77,24 +78,22 @@ The project is organized to make it easy to expand and maintain:
    npm install
    ```
 
-3. **Set up the database**
+3. **Create a PostgreSQL Database**
 
-   Create a Azure SQL database called `resernbis`.
+   Recommended: Use Render, Railway, or any PostgreSQL host.
+   Example database name: `revzbis`.
 
 4. **Environment Variables**
 
    Create a .env file in the root directory and add the following environment variables:
 
    ```bash
-   DB_SERVER="your-database-server.database.windows.net"
-   DB_NAME="resernbis"
-   DB_USER="your-database-username"
-   DB_PASSWORD="your-database-password"
-   DIALECT="mssql"
-   SESSION_SECRET="your-session-secret"
+   DATABASE_URL=postgresql://your_user:your_password@your_host:5432/revzbis
+   DB_DIALECT=postgres
+   SESSION_SECRET=your-session-secret
    ```
 
-   Replace the placeholder values with your own database details and secure keys.
+   _Use the Internal Database URL if running on Render, or the External Database URL if testing locally._
 
 5. **Start the server**
 
@@ -111,7 +110,7 @@ The project is organized to make it easy to expand and maintain:
 - **Mark Items as Collected** by clicking on the checkmark in the actions column.
 - **Get an Overview** of your progression using the progress bar, which shows how many BIS items you have collected.
 
-## Future Development
+## Roadmap
 
 - **Improve and Secure User Registration and Login:** Implement enhanced security features and better user experience for authentication.
 - **Expansion-Specific Features:** Allow users to choose which expansion/version of the game they are playing, so items, bosses, and locations can be adapted accordingly.
@@ -120,11 +119,11 @@ The project is organized to make it easy to expand and maintain:
 
 ## Contributions
 
-Contributions are welcome! Whether it's suggestions for improvements, bug fixes, or new features, feel free to create a pull request or open an issue to get started.
+Contributions are welcome! Whether it's a bug fix, feature suggestion, or improvement, feel free to open an issue or submit a pull request.
 
 ## Credit
 
-Resern BIS List is originally developed by [Daniel Rese](https://github.com/Danielresek). If you reuse or share this project, please give proper credit.
+Revz BIS List is developed and maintained by [Daniel Rese](https://github.com/Danielresek). If you reuse or share this project, please give proper credit.
 
 ## License
 
@@ -138,6 +137,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 ## Contact
 
-If you have any questions or suggestions, feel free to contact via email or through GitHub.
+Have questions, suggestions, or feedback?
+Reach out via GitHub or email.
 
 ---

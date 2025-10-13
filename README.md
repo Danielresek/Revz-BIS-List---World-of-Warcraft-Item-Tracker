@@ -6,11 +6,9 @@
 
 **Revz BIS List** is a web application created for World of Warcraft players who want to track their **Best in Slot (BIS)** gear for their characters. The app allows users to add characters, manage BIS items, and mark items as collected. This gives players an easy way to visualize their progression towards full BIS gear.
 
-The application is live and available at **www.revzbis.com**. Feel free to visit and try it out!
+_This application is currently inactive and not under any active development. You are welcome to download, contribute, or run your own local version._
 
-_Please note that this project is still under active development. You are welcome to download, contribute, or run your own local version._
-
-### Preview Screenshots
+### Preview Screenshots (Old logo)
 
 **Home Page:**
 ![Home Page](public/images/home_screenshot.png)
@@ -114,24 +112,6 @@ The project is organized to make it easy to expand and maintain:
 - **Expansion-Specific Features:** Allow users to choose which expansion/version of the game they are playing, so items, bosses, and locations can be adapted accordingly.
 - **Share BIS List and Progress:** Let users share their BIS lists and progress with others.
 - **Expand Services:** Extend the application to include integrations such as Warcraftlogs, boss guides, and boss loot tables.
-
-## Contributions
-
-Contributions are welcome! Whether it's a bug fix, feature suggestion, or improvement, feel free to open an issue or submit a pull request.
-
-## Credit
-
-Revz BIS List is developed and maintained by [Daniel Rese](https://github.com/Danielresek). If you reuse or share this project, please give proper credit.
-
-## License
-
-MIT License
-
-Copyright (c) 2024 Daniel Rese
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 ## Contact
 

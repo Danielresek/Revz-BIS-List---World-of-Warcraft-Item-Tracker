@@ -10,6 +10,7 @@ config/config.json
 # Ignoring local text files
 todo.md
 startup.txt
+pgAdmin.md
 
 # System files
 .DS_Store

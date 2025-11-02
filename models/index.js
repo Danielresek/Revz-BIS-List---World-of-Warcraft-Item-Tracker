@@ -6,16 +6,23 @@ const basename = path.basename(__filename);
 
 console.log("🗄️ Initializing database...");
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: process.env.DB_DIALECT || "postgres",
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
+const isProduction = process.env.NODE_ENV === "production";
+
+const sequelize = new Sequelize(
+  isProduction
+    ? process.env.DATABASE_URL_INTERNAL
+    : process.env.DATABASE_URL_EXTERNAL,
+  {
+    dialect: process.env.DB_DIALECT || "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
     },
-  },
-  logging: process.env.NODE_ENV === "development" ? console.log : false,
-});
+    logging: isProduction ? false : console.log,
+  }
+);
 
 const db = {};
 

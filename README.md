@@ -6,7 +6,7 @@
 
 **Revz BIS List** is a web application created for World of Warcraft players who want to track their **Best in Slot (BIS)** gear for their characters. The app allows users to add characters, manage BIS items, and mark items as collected. This gives players an easy way to visualize their progression towards full BIS gear.
 
-_This application is currently inactive and not under any active development. You are welcome to download, contribute, or run your own local version._
+_The project is currently in light development, but will soon be actively updated and expanded for the new Mists of Pandaria Classic expansion._
 
 ### Preview Screenshots (Old logo)
 
@@ -35,7 +35,7 @@ _This application is currently inactive and not under any active development. Yo
 - **Database:** PostgreSQL (hosted on Render)
 - **Frontend:** EJS, HTML, CSS, and JavaScript
 - **ORM:** Sequelize
-- **Authentication:** Supertokens
+- **Authentication:** Passport with Bcrypt and express-session
 - **Hosting:** Render
 
 ## Directory Structure
@@ -45,8 +45,6 @@ The project is organized to make it easy to expand and maintain:
 - **data/**: Contains a list of all BIS items that players can add, which is used for searching specific items when pressing the "Add items" button in the application.
 
 - **middleware/**: Contains middleware functions used in the application for authentication. For example, `auth.js` handles user login and verification using Supertokens to authenticate users.
-
-- **migrations/**: Contains migration files used to create, update, or remove tables in the database. This is especially useful during development when the structure of the database needs to be adjusted.
 
 - **models/**: Contains database models for various entities like users, characters, and items. These models are used to define and interact with the database, such as through Sequelize ORM.
 

@@ -15,13 +15,13 @@ export function closeAddCharacterModal() {
 
 // Function to open the "Edit Character" modal
 export function openEditCharacterModal(characterId, characterName) {
-  closeAllModals(); // Lukk alle åpne modaler
+  closeAllModals();
   const editModal = document.getElementById("editCharacterModal");
 
   if (editModal) {
     editModal.style.display = "block";
 
-    // Fyll modalen med dataene til karakteren
+    // Fill the modal with the data of the character
     const characterNameInput = document.getElementById("editCharacterName");
     if (characterNameInput) {
       characterNameInput.value = characterName;
@@ -29,7 +29,7 @@ export function openEditCharacterModal(characterId, characterName) {
       console.error("Edit Character modal elements not found.");
     }
 
-    // Lagre characterId i en data-attributt for senere bruk
+    // Store the characterId in a data attribute for later use
     editModal.setAttribute("data-character-id", characterId);
   } else {
     console.error("Edit Character modal not found.");

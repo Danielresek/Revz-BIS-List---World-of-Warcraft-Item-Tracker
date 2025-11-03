@@ -6,6 +6,8 @@
 
 **Revz BIS List** is a web application created for World of Warcraft players who want to track their **Best in Slot (BIS)** gear for their characters. The app allows users to add characters, manage BIS items, and mark items as collected. This gives players an easy way to visualize their progression towards full BIS gear.
 
+https://www.revzbis.com/
+
 _The project is currently in light development, but will soon be actively updated and expanded for the new Mists of Pandaria Classic expansion._
 
 ### Preview Screenshots (Old logo)

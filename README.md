@@ -99,13 +99,6 @@ The project is organized to make it easy to expand and maintain:
 
    The server will run at `http://localhost:3000`.
 
-## Usage
-
-- **Add Characters** by navigating to the "Profile" page after logging in.
-- **Add BIS Items** by selecting a character and clicking "Add Item".
-- **Mark Items as Collected** by clicking on the checkmark in the actions column.
-- **Get an Overview** of your progression using the progress bar, which shows how many BIS items you have collected.
-
 ## Roadmap
 
 - **Improve and Secure User Registration and Login:** Implement enhanced security features and better user experience for authentication.

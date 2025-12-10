@@ -8,7 +8,7 @@
 
 https://www.revzbis.com/
 
-_The project is currently in light development, but will soon be actively updated and expanded for the new Mists of Pandaria Classic expansion._
+_The project is actively maintained and being expanded with new features for the Mists of Pandaria Classic expansion._
 
 ### Preview Screenshots (Old logo)
 
@@ -33,71 +33,35 @@ _The project is currently in light development, but will soon be actively update
 
 ## Technologies Used
 
-- **Backend:** Node.js with Express.js
-- **Database:** PostgreSQL (hosted on Render)
-- **Frontend:** EJS, HTML, CSS, and JavaScript
-- **ORM:** Sequelize
-- **Authentication:** Passport with Bcrypt and express-session
-- **Hosting:** Render
+### Backend
+
+- Node.js
+- Express.js
+- PostgreSQL (Render)
+- Sequelize ORM
+
+### Frontend
+
+- Current: EJS, HTML, CSS, JavaScript
+- Planned: React + TypeScript
+- Future: Migration to Next.js
+
+### Hosting
+
+- Render (Backend + current frontend)
+- Vercel (future React / Next.js deployment)
 
 ## Directory Structure
 
-The project is organized to make it easy to expand and maintain:
+The project follows a clear and maintainable architecture:
 
-- **data/**: Contains a list of all BIS items that players can add, which is used for searching specific items when pressing the "Add items" button in the application.
-
-- **middleware/**: Contains middleware functions used in the application for authentication. For example, `auth.js` handles user login and verification using Supertokens to authenticate users.
-
-- **models/**: Contains database models for various entities like users, characters, and items. These models are used to define and interact with the database, such as through Sequelize ORM.
-
-- **public/**: Contains static content that is directly accessible by the client. This includes images, CSS files, and JavaScript files used for frontend styling and functionality.
-
-- **javascripts/**: This folder contains frontend JavaScript files to manage functionality on specific pages. The folder is divided into `home` and `profile`, each subfolder having JavaScript files that handle the logic for that specific part of the application, like DOM manipulation and API calls.
-
-- **routes/**: Contains all API endpoints for managing various functionalities, such as users, characters, and items. These files define how the server responds to HTTP requests for creating, reading, updating, and deleting resources.
-
-- **views/**: Contains EJS files used to dynamically generate HTML pages. This includes templates for all the pages that the user sees, such as the home page, profile page, and different modals used for adding or editing items.
-
-## Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/Danielresek/revz-BIS-List---World-of-Warcraft-Item-Tracker.git
-   ```
-
-2. **Install dependencies**
-
-   Navigate to the project folder and run:
-
-   ```bash
-   npm install
-   ```
-
-3. **Create a PostgreSQL Database**
-
-   Recommended: Use Render, Railway, or any PostgreSQL host.
-   Example database name: `revzbis`.
-
-4. **Environment Variables**
-
-   Create a .env file in the root directory and add the following environment variables:
-
-   ```bash
-   DATABASE_URL=postgresql://your_user:your_password@your_host:5432/revzbis
-   DB_DIALECT=postgres
-   SESSION_SECRET=your-session-secret
-   ```
-
-   _Use the Internal Database URL if running on Render, or the External Database URL if testing locally._
-
-5. **Start the server**
-
-   ```bash
-   npm start
-   ```
-
-   The server will run at `http://localhost:3000`.
+- **data/** – Contains BIS item lists used for item search and selection.
+- **middleware/** – Authentication middleware (e.g., session handling and access control).
+- **models/** – Sequelize models representing users, characters, and items.
+- **public/** – Static assets such as images, CSS, and frontend JavaScript.
+- **javascripts/** – Page-specific frontend logic for views like Home and Profile.
+- **routes/** – Express API endpoints for users, characters, items, and authentication.
+- **views/** – EJS templates used to render the UI before the upcoming React migration.
 
 ## Roadmap
 

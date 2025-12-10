@@ -40,16 +40,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Display filtered items or hide the suggestions box if none are found
     if (filteredItems.length > 0) {
-      suggestionsBox.innerHTML = filteredItems
-        .map(
-          (item) => `
-            <div class="suggestion-item" onclick="selectItem('${item.name}', '${item.icon}')">
-              <img src="https://wow.zamimg.com/images/wow/icons/large/${item.icon}.jpg" alt="${item.name}" width="24" height="24">
-              ${item.name}
-            </div>
-          `
-        )
-        .join("");
+      suggestionsBox.innerHTML = "";
+
+      filteredItems.forEach((item) => {
+        const div = document.createElement("div");
+        div.classList.add("suggestion-item");
+
+        div.innerHTML = `
+        <img 
+          src="https://wow.zamimg.com/images/wow/icons/large/${item.icon}.jpg"
+          alt="${item.name}"
+          width="24"
+          height="24"
+        >
+        ${item.name}
+      `;
+
+        div.addEventListener("click", () => {
+          selectItem(item.name, item.icon);
+        });
+
+        suggestionsBox.appendChild(div);
+      });
+
       suggestionsBox.style.display = "block";
     } else {
       suggestionsBox.innerHTML = "";

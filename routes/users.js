@@ -17,7 +17,7 @@ router.post("/login", (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.redirect("/login");
+      return res.render("login", { error: "Incorrect email or password." });
     }
     req.logIn(user, (err) => {
       if (err) {

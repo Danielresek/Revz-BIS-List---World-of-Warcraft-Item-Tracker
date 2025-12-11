@@ -17,6 +17,7 @@ export function openAddItemModal() {
   // Update modal save button
   const saveButton = document.querySelector(".btn button");
   saveButton.innerText = "Save Item";
+  saveButton.onclick = window.saveItem;
 
   // Set modal title and display it
   document.getElementById("addItemModal").style.display = "block";

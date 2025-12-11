@@ -1044,6 +1044,21 @@
     "name": "Visage of the Doomed",
     "icon": "inv_shield_zandalari_c_02",
     "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_zandalari_c_02.jpg"
+  },
+  {
+    "name": "Handwraps of the Witch Doctor",
+    "icon": "inv_glove_mail_raidshaman_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_mail_raidshaman_m_01.jpg"
+  },
+  {
+    "name": "Volatile Talisman of the Shado-Pan Assault",
+    "icon": "ability_hunter_posthaste",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_posthaste.jpg"
+  },
+  {
+    "name": "Tortos' Discarded Shell",
+    "icon": "inv_shield_thunderisleraid_d_02",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_thunderisleraid_d_02.jpg"
   }
 ]
 }

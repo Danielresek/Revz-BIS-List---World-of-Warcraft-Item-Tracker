@@ -1059,6 +1059,111 @@
     "name": "Tortos' Discarded Shell",
     "icon": "inv_shield_thunderisleraid_d_02",
     "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_thunderisleraid_d_02.jpg"
+  },
+  {
+    "name": "Unerring Vision of Lei Shen",
+    "icon": "ability_hunter_focusedaim",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_focusedaim.jpg"
+  },
+  {
+    "name": "Hood of the Thousandfold Hells",
+    "icon": "inv_helm_cloth_raidwarlock_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_cloth_raidwarlock_m_01.jpg"
+  },
+  {
+    "name": "Gloves of the Thousandfold Hells",
+    "icon": "inv_glove_cloth_raidwarlock_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_cloth_raidwarlock_m_01.jpg"
+  },
+  {
+    "name": "Leggings of the Thousandfold Hells",
+    "icon": "inv_pant_cloth_raidwarlock_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_cloth_raidwarlock_m_01.jpg"
+  },
+  {
+    "name": "Robes of the Chromatic Hydra",
+    "icon": "inv_chest_cloth_raidmage_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_cloth_raidmage_m_01.jpg"
+  },
+  {
+    "name": "Nine-Tailed Helmet",
+    "icon": "inv_helm_leather_raidrogue_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_leather_raidrogue_m_01.jpg"
+  },
+  {
+    "name": "Fire-Charm Chestguard",
+    "icon": "inv_chest_leather_raidmonk_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_leather_raidmonk_m_01.jpg"
+  },
+  {
+    "name": "Headpiece of the Witch Doctor",
+    "icon": "inv_helm_mail_raidshaman_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_mail_raidshaman_m_01.jpg"
+  },
+  {
+    "name": "Lightning Emperor's Breastplate",
+    "icon": "inv_chest_plate_raidpaladin_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_raidpaladin_m_01.jpg"
+  },
+  {
+    "name": "Legwraps of the Exorcist",
+    "icon": "inv_cloth_raidpriest_m_01pant",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidpriest_m_01pant.jpg"
+  },
+  {
+    "name": "Faceguard of the Last Mogu",
+    "icon": "inv_helmet_plate_raidwarrior_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_helmet_plate_raidwarrior_m_01.jpg"
+  },
+  {
+    "name": "Shoulderguards of the Last Mogu",
+    "icon": "inv_shoulder_plate_raidwarrior_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_raidwarrior_m_01.jpg"
+  },
+  {
+    "name": "Chestguard of the Last Mogu",
+    "icon": "inv_chest_plate_raidwarrior_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_raidwarrior_m_01.jpg"
+  },
+  {
+    "name": "Handguards of the Last Mogu",
+    "icon": "inv_gloves_plate_raidwarrior_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_gloves_plate_raidwarrior_m_01.jpg"
+  },
+  {
+    "name": "Legguards of the Last Mogu",
+    "icon": "inv_pants_plate_raidwarrior_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_pants_plate_raidwarrior_m_01.jpg"
+  },
+  {
+    "name": "Raiment of the Haunted Forest",
+    "icon": "inv_leather_raiddruid_m_01robe",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_raiddruid_m_01robe.jpg"
+  },
+  {
+    "name": "Saurok Stalker's Headguard",
+    "icon": "inv_helm_mail_raidhunter_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_mail_raidhunter_m_01.jpg"
+  },
+  {
+    "name": "Saurok Stalker's Gloves",
+    "icon": "inv_glove_mail_raidhunter_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_mail_raidhunter_m_01.jpg"
+  },
+  {
+    "name": "Saurok Stalker's Legguards",
+    "icon": "inv_pant_mail_raidhunter_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_mail_raidhunter_m_01.jpg"
+  },
+  {
+    "name": "Helmet of the All-Consuming Maw",
+    "icon": "inv_helmet_plate_deathknight_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_helmet_plate_deathknight_m_01.jpg"
+  },
+  {
+    "name": "Lightning Emperor's Chestguard",
+    "icon": "inv_chest_plate_raidpaladin_m_01",
+    "iconUrl": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_raidpaladin_m_01.jpg"
   }
 ]
 }

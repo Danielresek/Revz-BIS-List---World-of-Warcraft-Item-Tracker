@@ -46,6 +46,10 @@ _The project is actively maintained and being expanded with new features for the
 - Planned: React + TypeScript
 - Future: Migration to Next.js
 
+## CI / Automation
+
+GitHub Actions is used for basic CI, ensuring that dependencies install correctly on pull requests and merges to the main branch before deployment.
+
 ### Hosting
 
 - Render (Backend + current frontend)

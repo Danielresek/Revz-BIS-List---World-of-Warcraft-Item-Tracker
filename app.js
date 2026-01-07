@@ -31,15 +31,28 @@ app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 app.use("/data", express.static(path.join(__dirname, "data")));
 
 // Logging and body parsing
-app.use(logger("dev"));
+if (process.env.NODE_ENV !== "test") {
+  app.use(logger("dev"));
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Session handling
+const sessionSecret =
+  process.env.SESSION_SECRET ||
+  (process.env.NODE_ENV === "test" ? "test-session-secret" : undefined);
+
+if (!sessionSecret) {
+  throw new Error(
+    "SESSION_SECRET is missing. Add it to environment variables."
+  );
+}
+
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false },

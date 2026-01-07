@@ -24,19 +24,27 @@ router.get("/profile", ensureAuthenticated, async (req, res) => {
 // Route to create a new character
 router.post("/add", ensureAuthenticated, async (req, res) => {
   const { name, characterClass, classIconUrl } = req.body;
+
+  // Support both "characterClass" og "class" for Test compatibility
+  const characterClassValue = characterClass ?? req.body.class;
+
+  if (!name || !characterClassValue) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing required fields: name and class",
+    });
+  }
+
   const userId = req.user.id;
 
-  // Log the data received by the server for debugging purposes
-  console.log("Received data:", { name, characterClass, classIconUrl, userId });
-
   try {
-    // Create a new character in the database
     const newCharacter = await Character.create({
       name,
-      class: characterClass,
+      class: characterClassValue,
       classIconUrl,
       user_id: userId,
     });
+
     res.json({ success: true, character: newCharacter });
   } catch (error) {
     console.error("Error creating character:", error);

@@ -40,9 +40,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Session handling
+const sessionSecret =
+  process.env.SESSION_SECRET ||
+  (process.env.NODE_ENV === "test" ? "test-session-secret" : undefined);
+
+if (!sessionSecret) {
+  throw new Error(
+    "SESSION_SECRET is missing. Add it to environment variables."
+  );
+}
+
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false },

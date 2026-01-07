@@ -1,28 +1,36 @@
 const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
-const { User } = require("../models");
 const validator = require("validator");
-const { Op } = require("sequelize"); // Already correct
+const { Op } = require("sequelize");
+const db = require("../models");
+const { User } = db;
 
 module.exports = function (passport) {
   passport.use(
     new LocalStrategy(
-      // Identifier to allow username OR email
       { usernameField: "identifier" },
       async (identifier, password, done) => {
         try {
+          const rawIdentifier = (identifier || "").trim();
+          const loweredIdentifier = rawIdentifier.toLowerCase();
+
           let user;
 
-          //Check whether identifier is an email or username
-          if (validator.isEmail(identifier)) {
+          // Login with email
+          if (validator.isEmail(rawIdentifier)) {
             user = await User.findOne({
-              where: { email: identifier.toLowerCase() },
+              where: db.sequelize.where(
+                db.sequelize.fn("lower", db.sequelize.col("email")),
+                loweredIdentifier
+              ),
             });
           } else {
+            // Login with username (case-insensitive for SQLite + Postgres)
             user = await User.findOne({
-              where: {
-                username: { [Op.iLike]: identifier },
-              },
+              where: db.sequelize.where(
+                db.sequelize.fn("lower", db.sequelize.col("username")),
+                loweredIdentifier
+              ),
             });
           }
 
@@ -47,9 +55,7 @@ module.exports = function (passport) {
     )
   );
 
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
+  passport.serializeUser((user, done) => done(null, user.id));
 
   passport.deserializeUser(async (id, done) => {
     try {
@@ -65,28 +71,33 @@ module.exports = function (passport) {
 async function signup(req, res) {
   const { username, email, password, confirmPassword } = req.body;
 
-  // Validate email format
   if (!validator.isEmail(email)) {
     return res.render("signup", {
       error: "Please enter a valid email address.",
     });
   }
 
-  // Validate passwords match
   if (password !== confirmPassword) {
-    return res.render("signup", {
-      error: "Passwords do not match.",
-    });
+    return res.render("signup", { error: "Passwords do not match." });
   }
 
   try {
     const normalizedUsername = username.trim().toLowerCase();
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Check if username or email already exists
+    // Case-insensitive uniqueness check (works in SQLite + Postgres)
     const existingUser = await User.findOne({
       where: {
-        [Op.or]: [{ email: normalizedEmail }, { username: normalizedUsername }],
+        [Op.or]: [
+          db.sequelize.where(
+            db.sequelize.fn("lower", db.sequelize.col("email")),
+            normalizedEmail
+          ),
+          db.sequelize.where(
+            db.sequelize.fn("lower", db.sequelize.col("username")),
+            normalizedUsername
+          ),
+        ],
       },
     });
 
@@ -96,33 +107,34 @@ async function signup(req, res) {
       });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
     const user = await User.create({
       username: normalizedUsername,
       email: normalizedEmail,
       password_hash: hashedPassword,
     });
 
-    req.session.userId = user.id;
-    res.redirect("/");
+    // Auto-login via Passport + session
+    return req.login(user, (err) => {
+      if (err) {
+        console.error("Auto-login failed:", err);
+        return res.render("signup", {
+          error: "Signup succeeded, but login failed.",
+        });
+      }
+      req.session.userId = user.id;
+      return res.redirect("/");
+    });
   } catch (error) {
     console.error(error);
-    return res.render("signup", {
-      error: "Signup failed. Please try again.",
-    });
+    return res.render("signup", { error: "Signup failed. Please try again." });
   }
 }
 
-// Middleware to ensure the user is authenticated
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated() && req.session.userId) {
-    return next();
-  } else {
-    res.redirect("/login");
-  }
+  if (req.isAuthenticated() && req.session.userId) return next();
+  return res.redirect("/login");
 }
 
 module.exports.signup = signup;

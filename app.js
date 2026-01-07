@@ -31,7 +31,10 @@ app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 app.use("/data", express.static(path.join(__dirname, "data")));
 
 // Logging and body parsing
-app.use(logger("dev"));
+if (process.env.NODE_ENV !== "test") {
+  app.use(logger("dev"));
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

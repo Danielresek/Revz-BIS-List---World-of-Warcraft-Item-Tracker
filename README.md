@@ -26,10 +26,10 @@ _The project is actively maintained and being expanded with new features for the
 
 ## Features
 
-- 🔐 **User Registration & Login** – Secure authentication system.
-- 🎭 **Character Management** – Add, edit, and delete characters with class-specific icons.
-- 🎒 **Item Management** – Manage BIS items for each character.
-- ✅ **Track Progress** – Mark items as collected; visual progress bar shows BIS completion.
+- 🔐 **User Registration & Login** – Secure authentication system
+- 🎭 **Character Management** – Add, edit, and delete characters with class-specific icons
+- 🎒 **Item Management** – Manage BIS items for each character
+- ✅ **Track Progress** – Mark items as collected; visual progress bar shows BIS completion
 
 ## Technologies Used
 
@@ -48,7 +48,16 @@ _The project is actively maintained and being expanded with new features for the
 
 ### CI / Automation
 
-GitHub Actions is used for basic CI, ensuring that dependencies install correctly on pull requests and merges to the main branch before deployment.
+GitHub Actions is used for continuous integration to automatically validate backend changes before merging. The CI pipeline runs on pull requests and pushes to main, and includes:
+
+- Automated API tests using Jest and Supertest
+- Session-based authentication testing (positive and negative cases)
+- SQLite in-memory database for isolated test runs
+- Verification of core backend flows (auth, characters, items)
+
+This ensures that critical backend functionality is validated before changes are merged.
+
+_Run all backend tests locally with:_ `npm test`
 
 ### Hosting
 
@@ -59,20 +68,22 @@ GitHub Actions is used for basic CI, ensuring that dependencies install correctl
 
 The project follows a clear and maintainable architecture:
 
-- **data/** – Contains BIS item lists used for item search and selection.
-- **middleware/** – Authentication middleware (e.g., session handling and access control).
-- **models/** – Sequelize models representing users, characters, and items.
-- **public/** – Static assets such as images, CSS, and frontend JavaScript.
-- **javascripts/** – Page-specific frontend logic for views like Home and Profile.
-- **routes/** – Express API endpoints for users, characters, items, and authentication.
-- **views/** – EJS templates used to render the UI before the upcoming React migration.
+- **.github/** – GitHub Actions workflows and CI configuration
+- **data/** – Contains BIS item lists used for item search and selection
+- **middleware/** – Authentication middleware (e.g., session handling and access control)
+- **models/** – Sequelize models representing users, characters, and items
+- **public/** – Static assets such as images, CSS, and frontend JavaScript
+- **javascripts/** – Page-specific frontend logic for views like Home and Profile
+- **routes/** – Express API endpoints for users, characters, items, and authentication
+- **tests/** – Automated API tests (Jest + Supertest)
+- **views/** – EJS templates used to render the UI before the upcoming React migration
 
 ## Roadmap
 
-- **Improve and Secure User Registration and Login:** Implement enhanced security features and better user experience for authentication.
-- **Expansion-Specific Features:** Allow users to choose which expansion/version of the game they are playing, so items, bosses, and locations can be adapted accordingly.
-- **Share BIS List and Progress:** Let users share their BIS lists and progress with others.
-- **Expand Services:** Extend the application to include integrations such as Warcraftlogs, boss guides, and boss loot tables.
+- **Improve and Secure User Registration and Login:** Implement enhanced security features and better user experience for authentication
+- **Expansion-Specific Features:** Allow users to choose which expansion/version of the game they are playing, so items, bosses, and locations can be adapted accordingly
+- **Share BIS List and Progress:** Let users share their BIS lists and progress with others
+- **Expand Services:** Extend the application to include integrations such as Warcraftlogs, boss guides, and boss loot tables
 
 ## Contact
 

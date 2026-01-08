@@ -3,24 +3,38 @@ const { Item } = require("../models");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const { Op } = require("sequelize");
+const rateLimit = require("express-rate-limit");
+
+// Rate limiter for search endpoint
+const searchLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Search for items by name
-router.get("/search", auth.ensureAuthenticated, async (req, res) => {
-  const { q } = req.query;
-  try {
-    const items = await Item.findAll({
-      where: {
-        name: {
-          [Op.iLike]: `%${q}%`,
+router.get(
+  "/search",
+  searchLimiter,
+  auth.ensureAuthenticated,
+  async (req, res) => {
+    const { q } = req.query;
+    try {
+      const items = await Item.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `%${q}%`,
+          },
         },
-      },
-    });
-    res.json(items);
-  } catch (error) {
-    console.error("Error searching items:", error);
-    res.status(500).json({ message: "Error searching items", error });
+      });
+      res.json(items);
+    } catch (error) {
+      console.error("Error searching items:", error);
+      res.status(500).json({ message: "Error searching items", error });
+    }
   }
-});
+);
 
 // Update the status of an item
 router.put("/:id/status", auth.ensureAuthenticated, async (req, res) => {

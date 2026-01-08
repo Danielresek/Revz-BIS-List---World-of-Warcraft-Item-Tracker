@@ -20,6 +20,7 @@ const db = require("./models");
 require("./middleware/auth")(passport);
 
 const app = express();
+app.set("trust proxy", 1);
 
 // Configure view engine
 app.set("views", path.join(__dirname, "views"));
@@ -52,10 +53,17 @@ if (!sessionSecret) {
 
 app.use(
   session({
+    name: "sid",
     secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false },
+
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // secure cookie i prod
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    },
   })
 );
 

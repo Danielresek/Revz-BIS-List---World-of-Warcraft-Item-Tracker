@@ -2,16 +2,25 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const auth = require("../middleware/auth");
+const rateLimit = require("express-rate-limit");
+
+// Rate limiter to prevent brute-force attacks on authentication routes
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // GET routes to render the signup and login pages
 router.get("/signup", (req, res) => res.render("signup"));
 router.get("/login", (req, res) => res.render("login"));
 
 // Handle user registration via the signup form
-router.post("/signup", auth.signup);
+router.post("/signup", authLimiter, auth.signup);
 
 // Handle user login using Passport.js authentication
-router.post("/login", (req, res, next) => {
+router.post("/login", authLimiter, (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);

@@ -1,5 +1,5 @@
 const express = require("express");
-const { Item } = require("../models");
+const { Item, Character } = require("../models");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const { Op } = require("sequelize");
@@ -41,9 +41,13 @@ router.put("/:id/status", auth.ensureAuthenticated, async (req, res) => {
       return res.status(400).send("Invalid status value");
     }
 
-    const item = await Item.findByPk(itemId);
+    const item = await Item.findByPk(itemId, { include: [{ model: Character }] });
     if (!item) {
       return res.status(404).send("Item not found");
+    }
+
+    if (!item.Character || item.Character.user_id !== req.user.id) {
+      return res.status(403).send("Unauthorized");
     }
 
     item.status = status;
@@ -59,6 +63,14 @@ router.put("/:id/status", auth.ensureAuthenticated, async (req, res) => {
 // GET all items for a specific character
 router.get("/:characterId", auth.ensureAuthenticated, async (req, res) => {
   try {
+    const character = await Character.findByPk(req.params.characterId);
+    if (!character) {
+      return res.status(404).json({ message: "Character not found" });
+    }
+    if (character.user_id !== req.user.id) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
     const items = await Item.findAll({
       where: { character_id: req.params.characterId },
     });
@@ -73,6 +85,19 @@ router.get("/:characterId", auth.ensureAuthenticated, async (req, res) => {
 router.post("/", auth.ensureAuthenticated, async (req, res) => {
   const { name, description, slot, boss, character_id, icon } = req.body;
   try {
+    if (!character_id || isNaN(parseInt(character_id, 10))) {
+      return res.status(400).json({ message: "Invalid character_id" });
+    }
+
+    const character = await Character.findByPk(character_id);
+    if (!character) {
+      return res.status(404).json({ message: "Character not found" });
+    }
+
+    if (character.user_id !== req.user.id) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
     const newItem = await Item.create({
       name,
       description,
@@ -81,7 +106,7 @@ router.post("/", auth.ensureAuthenticated, async (req, res) => {
       character_id,
       icon,
     });
-    res.json(newItem);
+    res.status(201).json(newItem);
   } catch (error) {
     console.error("Error creating item:", error);
     res.status(500).json({ message: "Error creating item", error });
@@ -92,11 +117,16 @@ router.post("/", auth.ensureAuthenticated, async (req, res) => {
 router.delete("/:itemId", auth.ensureAuthenticated, async (req, res) => {
   try {
     const itemId = req.params.itemId;
-    const item = await Item.findByPk(itemId);
+    const item = await Item.findByPk(itemId, { include: [{ model: Character }] });
 
     if (!item) {
       return res.status(404).json({ message: "Item not found" });
     }
+
+    if (!item.Character || item.Character.user_id !== req.user.id) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
     await item.destroy();
     res.json({ message: "Item deleted successfully" });
   } catch (error) {
@@ -111,9 +141,20 @@ router.put("/:itemId", auth.ensureAuthenticated, async (req, res) => {
   const { name, description, slot, boss, character_id, icon } = req.body;
 
   try {
-    const item = await Item.findByPk(itemId);
+    const item = await Item.findByPk(itemId, { include: [{ model: Character }] });
     if (!item) {
       return res.status(404).json({ message: "Item not found" });
+    }
+
+    if (!item.Character || item.Character.user_id !== req.user.id) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    // If changing ownership via character_id, ensure target character belongs to user
+    if (character_id && character_id !== item.character_id) {
+      const targetChar = await Character.findByPk(character_id);
+      if (!targetChar) return res.status(404).json({ message: "Target character not found" });
+      if (targetChar.user_id !== req.user.id) return res.status(403).json({ message: "Unauthorized to assign item to this character" });
     }
 
     await item.update({

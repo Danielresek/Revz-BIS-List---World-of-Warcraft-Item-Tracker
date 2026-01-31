@@ -32,7 +32,11 @@
     "supertokens-node": "^22.1.1",
     "sweetalert2": "^11.22.1",
     "tedious": "^18.6.1",
-    "validator": "^13.15.15"
+    "validator": "^13.15.15",
+    "helmet": "^7.0.0",
+    "csurf": "^1.11.0",
+    "connect-redis": "^7.0.0",
+    "redis": "^4.7.1"
   },
   "devDependencies": {
     "cross-env": "^10.1.0",

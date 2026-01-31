@@ -28,13 +28,17 @@ router.post("/login", authLimiter, (req, res, next) => {
     if (!user) {
       return res.render("login", { error: "Incorrect email or password." });
     }
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
-      }
-      // Set userId in the session after successful login
-      req.session.userId = user.id;
-      return res.redirect("/");
+
+    // Regenerate session on login to prevent session fixation
+    req.session.regenerate((err) => {
+      if (err) return next(err);
+
+      req.logIn(user, (err) => {
+        if (err) return next(err);
+        // Set userId in the session after successful login
+        req.session.userId = user.id;
+        return res.redirect("/");
+      });
     });
   })(req, res, next);
 });

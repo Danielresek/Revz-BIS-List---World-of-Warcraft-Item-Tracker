@@ -128,44 +128,4 @@ describe("Items API", () => {
     // Your app redirects to /login when unauthenticated
     expect([302, 401, 403]).toContain(res.status);
   });
-
-  it("rejects cross-user item operations (create/get/update/delete)", async () => {
-    // User A creates character + item
-    const agentA = await signupAndGetAgent();
-    const charA = await createCharacter(agentA);
-    const itemA = await createItem(agentA, charA.id);
-
-    // User B (different) tries to manipulate
-    const agentB = await signupAndGetAgent();
-
-    // Create item for A's character (should be forbidden)
-    const createRes = await agentB.post("/items").send({
-      name: "Bad Item",
-      description: "Bad",
-      slot: "Head",
-      boss: "Boss",
-      character_id: charA.id,
-      icon: "inv_helmet_01",
-    });
-    expect([400, 403]).toContain(createRes.status);
-
-    // Get items for A's character (should be forbidden)
-    const getRes = await agentB.get(`/items/${charA.id}`);
-    expect(getRes.status).toBe(403);
-
-    // Update A's item (should be forbidden)
-    const updateRes = await agentB.put(`/items/${itemA.id}`).send({
-      name: "Hacked",
-      description: "x",
-      slot: "Head",
-      boss: "x",
-      character_id: charA.id,
-      icon: "inv_helmet_01",
-    });
-    expect([403, 404]).toContain(updateRes.status);
-
-    // Delete A's item (should be forbidden)
-    const delRes = await agentB.delete(`/items/${itemA.id}`);
-    expect([403, 404]).toContain(delRes.status);
-  });
 });

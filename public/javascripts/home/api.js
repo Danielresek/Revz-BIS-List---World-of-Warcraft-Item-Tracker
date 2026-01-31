@@ -2,6 +2,8 @@
 // =======================================
 // All functions related to interacting with the backend API
 
+import { getCsrf } from "../utils/csrf.js";
+
 export async function fetchItems(characterId) {
   try {
     const response = await fetch(`/items/${characterId}`);

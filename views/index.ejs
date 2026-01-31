@@ -182,6 +182,31 @@
         </div>
         </div>
     </div>
+    <!-- Diagnostic stub: if modules fail to load, provide friendly fallbacks and console hints -->
+    <script>
+      (function() {
+        const stubs = {
+          openAddItemModal: 'Open Add Item',
+          saveItem: 'Save Item',
+          updateItem: 'Update Item',
+          editItem: 'Edit Item',
+          receivedItem: 'Mark Received',
+          deleteItem: 'Delete Item',
+        };
+
+        Object.keys(stubs).forEach((name) => {
+          if (typeof window[name] !== 'function') {
+            window[name] = function() {
+              console.error(`Client init error: ${name} is not available. Check console for module load errors.`);
+              alert(`${stubs[name]} unavailable — see console for details.`);
+            };
+          }
+        });
+
+        console.info('Diagnostic stubs installed: missing module handlers will show alerts.');
+      })();
+    </script>
+
     <!-- JavaScript files -->
     <script src="/javascripts/home/itemIcons.js"></script>
     <script type="module" src="/javascripts/home/api.js"></script>

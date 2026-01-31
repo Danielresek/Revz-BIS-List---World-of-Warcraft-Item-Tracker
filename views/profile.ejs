@@ -154,6 +154,28 @@
         </div>
     </div>
 
+    <!-- Diagnostic stub: friendly fallbacks if profile modules fail to initialize -->
+    <script>
+      (function() {
+        const stubs = {
+          openAddCharacterModal: 'Open Add Character',
+          deleteCharacter: 'Delete Character',
+          saveCharacterChanges: 'Save Character',
+        };
+
+        Object.keys(stubs).forEach((name) => {
+          if (typeof window[name] !== 'function') {
+            window[name] = function() {
+              console.error(`Client init error: ${name} is not available. Check console for module load errors.`);
+              alert(`${stubs[name]} unavailable — see console for details.`);
+            };
+          }
+        });
+
+        console.info('Profile diagnostic stubs installed.');
+      })();
+    </script>
+
     <!-- JavaScript files for profile functionality -->
     <script type="module" src="/javascripts/profile/characterApi.js"></script>
     <script type="module" src="/javascripts/profile/uiHandler.js"></script>

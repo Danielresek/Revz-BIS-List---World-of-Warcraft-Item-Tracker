@@ -2,6 +2,8 @@
 // =======================================
 // Functions for interacting with the backend API for character management
 
+import { getCsrf } from "../utils/csrf.js";
+
 // Function to delete a character based on character ID
 export async function deleteCharacter(characterId) {
   const id = parseInt(characterId, 10);
@@ -36,7 +38,10 @@ export async function addCharacter(name, characterClass, classIconUrl) {
     const csrf = getCsrf();
     const response = await fetch("/characters/add", {
       method: "POST",
-      headers: Object.assign({ "Content-Type": "application/json" }, csrf ? { "CSRF-Token": csrf } : {}),
+      headers: Object.assign(
+        { "Content-Type": "application/json" },
+        csrf ? { "CSRF-Token": csrf } : {},
+      ),
       body: JSON.stringify({ name, characterClass, classIconUrl }),
     });
 

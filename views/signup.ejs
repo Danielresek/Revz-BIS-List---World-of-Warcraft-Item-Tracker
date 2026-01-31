@@ -30,13 +30,7 @@
             <% } %>
 
             <!-- Signup form -->
-            <% if (typeof csrfToken !== 'undefined') { %>
-              <meta name="csrf-token" content="<%= csrfToken %>">
-            <% } %>
             <form action="/signup" method="POST">
-                <% if (typeof csrfToken !== 'undefined') { %>
-                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <% } %>
                 <!-- Input for username -->
                 <div class="data">
                     <label>Username</label>

@@ -2,6 +2,8 @@
 // =======================================
 // All functions related to interacting with the backend API
 
+import { getCsrf } from "../utils/csrf.js";
+
 export async function fetchItems(characterId) {
   try {
     const response = await fetch(`/items/${characterId}`);
@@ -129,10 +131,8 @@ export async function updateItem(id, item) {
 // Delete item
 export async function deleteItem(deleteItemId) {
   try {
-    const csrf = getCsrf();
     const response = await fetch(`/items/${deleteItemId}`, {
       method: "DELETE",
-      headers: csrf ? { "CSRF-Token": csrf } : {},
     });
     if (response.ok) {
       Swal.fire({

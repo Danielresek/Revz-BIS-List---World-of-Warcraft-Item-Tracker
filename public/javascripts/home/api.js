@@ -129,8 +129,10 @@ export async function updateItem(id, item) {
 // Delete item
 export async function deleteItem(deleteItemId) {
   try {
+    const csrf = getCsrf();
     const response = await fetch(`/items/${deleteItemId}`, {
       method: "DELETE",
+      headers: csrf ? { "CSRF-Token": csrf } : {},
     });
     if (response.ok) {
       Swal.fire({

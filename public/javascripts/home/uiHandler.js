@@ -198,11 +198,10 @@ export function updateRowToPending(row, tableBody) {
 // Function to undo item received status
 export async function undoReceivedItem(id, tableBody) {
   try {
+    const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
     const response = await fetch(`/items/${id}/status`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: Object.assign({ "Content-Type": "application/json" }, csrf ? { "CSRF-Token": csrf } : {}),
       body: JSON.stringify({ status: "pending" }),
     });
 

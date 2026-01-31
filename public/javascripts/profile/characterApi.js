@@ -33,11 +33,10 @@ export async function deleteCharacter(characterId) {
 // Function to add a new character
 export async function addCharacter(name, characterClass, classIconUrl) {
   try {
+    const csrf = getCsrf();
     const response = await fetch("/characters/add", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: Object.assign({ "Content-Type": "application/json" }, csrf ? { "CSRF-Token": csrf } : {}),
       body: JSON.stringify({ name, characterClass, classIconUrl }),
     });
 

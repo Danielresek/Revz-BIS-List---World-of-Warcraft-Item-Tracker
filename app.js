@@ -40,7 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Session handling + security middlewares
+// Session handling
 const sessionSecret =
   process.env.SESSION_SECRET ||
   (process.env.NODE_ENV === "test" ? "test-session-secret" : undefined);
@@ -51,65 +51,25 @@ if (!sessionSecret) {
   );
 }
 
-const sessionOptions = {
-  name: "sid",
-  secret: sessionSecret,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // secure cookie i prod
-    sameSite: "lax",
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-  },
-};
+app.use(
+  session({
+    name: "sid",
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: false,
 
-// Optional Redis session store configuration (requires REDIS_URL env)
-if (process.env.REDIS_URL) {
-  try {
-    const RedisStore = require("connect-redis")(session);
-    const { createClient } = require("redis");
-    const redisClient = createClient({ url: process.env.REDIS_URL });
-    redisClient.connect().catch((err) => console.error("Redis error:", err));
-    sessionOptions.store = new RedisStore({ client: redisClient });
-    console.log("Using Redis session store");
-  } catch (e) {
-    console.warn("connect-redis or redis not installed or failed to configure:", e.message || e);
-  }
-}
-
-app.use(session(sessionOptions));
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // secure cookie i prod
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    },
+  })
+);
 
 // Passport.js configuration
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Helmet (best effort)
-try {
-  const helmet = require("helmet");
-  app.use(helmet());
-} catch (e) {
-  console.warn("helmet not installed; skipping");
-}
-
-// CSRF protection (disabled in test env to keep tests simple)
-if (process.env.NODE_ENV !== "test") {
-  try {
-    const csurf = require("csurf");
-    app.use(csurf());
-    // expose token to views
-    app.use((req, res, next) => {
-      try {
-        res.locals.csrfToken = req.csrfToken();
-      } catch (e) {
-        res.locals.csrfToken = undefined;
-      }
-      next();
-    });
-  } catch (e) {
-    console.warn("csurf not installed; skipping CSRF protection");
-  }
-}
 
 // Middleware to make login status available in EJS
 app.use((req, res, next) => {

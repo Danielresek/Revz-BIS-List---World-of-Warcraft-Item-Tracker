@@ -115,16 +115,24 @@ async function signup(req, res) {
       password_hash: hashedPassword,
     });
 
-    // Auto-login via Passport + session
-    return req.login(user, (err) => {
-      if (err) {
-        console.error("Auto-login failed:", err);
+    // Auto-login via Passport + session. Regenerate session to prevent fixation.
+    return req.session.regenerate((regErr) => {
+      if (regErr) {
+        console.error("Session regenerate failed:", regErr);
         return res.render("signup", {
-          error: "Signup succeeded, but login failed.",
+          error: "Signup succeeded, but session setup failed.",
         });
       }
-      req.session.userId = user.id;
-      return res.redirect("/");
+      return req.login(user, (err) => {
+        if (err) {
+          console.error("Auto-login failed:", err);
+          return res.render("signup", {
+            error: "Signup succeeded, but login failed.",
+          });
+        }
+        req.session.userId = user.id;
+        return res.redirect("/");
+      });
     });
   } catch (error) {
     console.error(error);

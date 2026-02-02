@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/stylesheets/logo.css">
     <link rel="stylesheet" href="/stylesheets/form.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <meta name="csrf-token" content="<%= csrfToken || '' %>">
 </head>
 <body>
     <!-- Website logo -->
@@ -31,6 +32,7 @@
 
             <!-- Signup form -->
             <form action="/signup" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken || '' %>">
                 <!-- Input for username -->
                 <div class="data">
                     <label>Username</label>

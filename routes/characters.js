@@ -1,10 +1,31 @@
 const express = require("express");
 const { Character, User } = require("../models");
 const { ensureAuthenticated } = require("../middleware/auth"); // Middleware for autentisering
+const rateLimit = require("express-rate-limit");
+
 const router = express.Router();
 
+// Apply a reasonable rate limit to character-related routes to mitigate abuse
+const charactersLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+router.use(charactersLimiter);
+let csrfProtection = (req, res, next) => next();
+if (process.env.NODE_ENV !== "test" || process.env.FORCE_CSRF === "1") {
+  try {
+    const csurf = require("csurf");
+    csrfProtection = csurf();
+  } catch (err) {
+    console.warn("csurf not installed — skipping CSRF protection in characters routes.");
+  }
+}
+
 // Route to display profile page with a list of characters for the logged-in user
-router.get("/profile", ensureAuthenticated, async (req, res) => {
+router.get("/profile", ensureAuthenticated, csrfProtection, async (req, res) => {
   try {
     // Fetch all characters belonging to the logged-in user
     const characters = await Character.findAll({
@@ -13,8 +34,9 @@ router.get("/profile", ensureAuthenticated, async (req, res) => {
     // Fetch the user's data
     const user = await User.findOne({ where: { id: req.user.id } });
 
-    // Render the profile page with user and character data
-    res.render("profile", { user, characters });
+    // Render the profile page with user and character data and CSRF token
+    const csrfToken = typeof req.csrfToken === "function" ? req.csrfToken() : null;
+    res.render("profile", { user, characters, csrfToken });
   } catch (error) {
     console.error("Error fetching characters:", error);
     res.redirect("/");
@@ -22,7 +44,7 @@ router.get("/profile", ensureAuthenticated, async (req, res) => {
 });
 
 // Route to create a new character
-router.post("/add", ensureAuthenticated, async (req, res) => {
+router.post("/add", ensureAuthenticated, csrfProtection, async (req, res) => {
   const { name, characterClass, classIconUrl } = req.body;
 
   // Support both "characterClass" og "class" for Test compatibility
@@ -68,7 +90,7 @@ router.get("/:userId", ensureAuthenticated, async (req, res) => {
 });
 
 // DELETE route to delete a character based on its ID
-router.delete("/:id", ensureAuthenticated, async (req, res) => {
+router.delete("/:id", ensureAuthenticated, csrfProtection, async (req, res) => {
   const characterId = req.params.id;
   try {
     // Find the character by its primary key (ID)
@@ -90,7 +112,7 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
 });
 
 // PUT route to update a character based on its ID
-router.put("/:id", ensureAuthenticated, async (req, res) => {
+router.put("/:id", ensureAuthenticated, csrfProtection, async (req, res) => {
   const characterId = req.params.id;
   const { name } = req.body;
 

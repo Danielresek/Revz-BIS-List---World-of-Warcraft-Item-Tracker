@@ -4,14 +4,36 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const { Op } = require("sequelize");
 const rateLimit = require("express-rate-limit");
+let csrfProtection = (req, res, next) => next();
+if (process.env.NODE_ENV !== "test" || process.env.FORCE_CSRF === "1") {
+  try {
+    const csurf = require("csurf");
+    csrfProtection = csurf();
+  } catch (err) {
+    console.warn("csurf not installed — skipping CSRF protection in items routes.");
+  }
+}
 
-// Rate limiter for search endpoint
+// Temporary CSRF debug logging removed.
+
+// Global limiter for item routes to mitigate abuse (applies to all item endpoints)
+const itemsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200, // limit each IP to 200 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Rate limiter for search endpoint (stricter)
 const searchLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 30,
   standardHeaders: true,
   legacyHeaders: false,
 });
+
+// Attach global limiter to items router
+router.use(itemsLimiter);
 
 // Search for items by name
 router.get("/search", searchLimiter, auth.ensureAuthenticated, async (req, res) => {
@@ -32,7 +54,7 @@ router.get("/search", searchLimiter, auth.ensureAuthenticated, async (req, res) 
 });
 
 // Update the status of an item
-router.put("/:id/status", auth.ensureAuthenticated, async (req, res) => {
+router.put("/:id/status", auth.ensureAuthenticated, csrfProtection, async (req, res) => {
   try {
     const itemId = req.params.id;
     const { status } = req.body;
@@ -70,7 +92,7 @@ router.get("/:characterId", auth.ensureAuthenticated, async (req, res) => {
 });
 
 // Add a new item
-router.post("/", auth.ensureAuthenticated, async (req, res) => {
+router.post("/", auth.ensureAuthenticated, csrfProtection, async (req, res) => {
   const { name, description, slot, boss, character_id, icon } = req.body;
   try {
     const newItem = await Item.create({
@@ -89,7 +111,7 @@ router.post("/", auth.ensureAuthenticated, async (req, res) => {
 });
 
 // DELETE an item by itemId
-router.delete("/:itemId", auth.ensureAuthenticated, async (req, res) => {
+router.delete("/:itemId", auth.ensureAuthenticated, csrfProtection, async (req, res) => {
   try {
     const itemId = req.params.itemId;
     const item = await Item.findByPk(itemId);
@@ -106,7 +128,7 @@ router.delete("/:itemId", auth.ensureAuthenticated, async (req, res) => {
 });
 
 // Update an item by itemId
-router.put("/:itemId", auth.ensureAuthenticated, async (req, res) => {
+router.put("/:itemId", auth.ensureAuthenticated, csrfProtection, async (req, res) => {
   const { itemId } = req.params;
   const { name, description, slot, boss, character_id, icon } = req.body;
 

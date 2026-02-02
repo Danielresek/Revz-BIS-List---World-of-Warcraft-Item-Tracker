@@ -1,7 +1,19 @@
 const express = require("express");
 const { Character, User } = require("../models");
 const { ensureAuthenticated } = require("../middleware/auth"); // Middleware for autentisering
+const rateLimit = require("express-rate-limit");
+
 const router = express.Router();
+
+// Apply a reasonable rate limit to character-related routes to mitigate abuse
+const charactersLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+router.use(charactersLimiter);
 let csrfProtection = (req, res, next) => next();
 if (process.env.NODE_ENV !== "test" || process.env.FORCE_CSRF === "1") {
   try {

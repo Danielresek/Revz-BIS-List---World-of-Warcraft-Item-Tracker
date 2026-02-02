@@ -16,13 +16,24 @@ if (process.env.NODE_ENV !== "test" || process.env.FORCE_CSRF === "1") {
 
 // Temporary CSRF debug logging removed.
 
-// Rate limiter for search endpoint
+// Global limiter for item routes to mitigate abuse (applies to all item endpoints)
+const itemsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200, // limit each IP to 200 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Rate limiter for search endpoint (stricter)
 const searchLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 30,
   standardHeaders: true,
   legacyHeaders: false,
 });
+
+// Attach global limiter to items router
+router.use(itemsLimiter);
 
 // Search for items by name
 router.get("/search", searchLimiter, auth.ensureAuthenticated, async (req, res) => {

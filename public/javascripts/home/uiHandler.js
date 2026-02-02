@@ -1,6 +1,7 @@
 // UI Handling
 // =======================================
 // Functions to manage modals and UI updates
+import { getCsrf } from "../utils/csrf.js";
 
 // Function to open the modal for adding a new item
 export function openAddItemModal() {
@@ -198,11 +199,11 @@ export function updateRowToPending(row, tableBody) {
 // Function to undo item received status
 export async function undoReceivedItem(id, tableBody) {
   try {
+    const csrf = getCsrf();
     const response = await fetch(`/items/${id}/status`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      credentials: 'same-origin',
+      headers: Object.assign({ "Content-Type": "application/json" }, csrf ? { "X-CSRF-Token": csrf } : {}),
       body: JSON.stringify({ status: "pending" }),
     });
 

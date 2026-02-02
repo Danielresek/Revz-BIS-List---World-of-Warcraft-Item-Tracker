@@ -6,7 +6,7 @@ import { getCsrf } from "../utils/csrf.js";
 
 export async function fetchItems(characterId) {
   try {
-    const response = await fetch(`/items/${characterId}`);
+    const response = await fetch(`/items/${characterId}`, { credentials: 'same-origin' });
     if (!response.ok) {
       console.error("Error fetching items");
       return [];
@@ -21,11 +21,13 @@ export async function fetchItems(characterId) {
 // Add item
 export async function saveItem(item) {
   try {
+    const csrf = getCsrf();
     const response = await fetch("/items", {
       method: "POST",
-      headers: {
+      headers: Object.assign({
         "Content-Type": "application/json",
-      },
+      }, csrf ? { "X-CSRF-Token": csrf } : {}),
+      credentials: 'same-origin',
       body: JSON.stringify(item),
     });
     if (response.ok) {
@@ -76,11 +78,13 @@ export async function saveItem(item) {
 // Update item
 export async function updateItem(id, item) {
   try {
+    const csrf = getCsrf();
     const response = await fetch(`/items/${id}`, {
       method: "PUT",
-      headers: {
+      headers: Object.assign({
         "Content-Type": "application/json",
-      },
+      }, csrf ? { "X-CSRF-Token": csrf } : {}),
+      credentials: 'same-origin',
       body: JSON.stringify(item),
     });
     if (response.ok) {
@@ -131,8 +135,11 @@ export async function updateItem(id, item) {
 // Delete item
 export async function deleteItem(deleteItemId) {
   try {
+    const csrf = getCsrf();
     const response = await fetch(`/items/${deleteItemId}`, {
       method: "DELETE",
+      credentials: 'same-origin',
+      headers: Object.assign({}, csrf ? { "X-CSRF-Token": csrf } : {}),
     });
     if (response.ok) {
       Swal.fire({

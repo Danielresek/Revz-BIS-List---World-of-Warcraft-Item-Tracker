@@ -2,6 +2,7 @@
 // =======================================
 // Import necessary API and UI handler functions
 import { deleteCharacter, addCharacter } from "./characterApi.js";
+import { getCsrf } from "../utils/csrf.js";
 import {
   openAddCharacterModal,
   closeAddCharacterModal,
@@ -179,11 +180,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       try {
         // Make a PUT request to update the character
+        const csrf = getCsrf();
         const response = await fetch(`/characters/${characterId}`, {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: Object.assign({ "Content-Type": "application/json" }, csrf ? { "X-CSRF-Token": csrf } : {}),
           body: JSON.stringify({ name: updatedName }),
         });
 

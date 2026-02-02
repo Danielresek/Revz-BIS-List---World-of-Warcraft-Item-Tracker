@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta name="csrf-token" content="<%= csrfToken || '' %>">
 
 </head>
 
@@ -72,6 +73,7 @@
 
             <!-- Form to add a new character -->
             <form id="addCharacterForm">
+                <input type="hidden" name="_csrf" value="<%= csrfToken || '' %>">
                 <!-- Input for character name -->
                 <label for="characterName">Character Name:</label>
                 <input type="text" id="characterName" name="name" required />
@@ -138,6 +140,7 @@
 
             <!-- Form to edit an existing character -->
             <form id="editCharacterForm">
+                <input type="hidden" name="_csrf" value="<%= csrfToken || '' %>">
                 <!-- Input for new character name -->
                 <label for="editCharacterName">Character Name:</label>
                 <input type="text" id="editCharacterName" name="name" required>

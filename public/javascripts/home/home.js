@@ -13,6 +13,7 @@ import {
   updateRowToReceived,
   undoReceivedItem,
 } from "./uiHandler.js";
+import { getCsrf } from "../utils/csrf.js";
 
 // References to important DOM elements used throughout the script
 const tableBody = document.getElementById("item-table-body");
@@ -65,7 +66,7 @@ window.editItem = async (id) => {
 
   try {
     // Fetch the item by ID to populate the modal with existing data
-    const response = await fetch(`/items/${id}`);
+    const response = await fetch(`/items/${id}`, { credentials: 'same-origin' });
     if (!response.ok) {
       console.error("Failed to fetch item for editing");
       return;
@@ -245,11 +246,11 @@ async function fetchCharacters() {
 // Mark an item as received
 window.receivedItem = async (id) => {
   try {
+    const csrf = getCsrf();
     const response = await fetch(`/items/${id}/status`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      credentials: 'same-origin',
+      headers: Object.assign({ "Content-Type": "application/json" }, csrf ? { "X-CSRF-Token": csrf } : {}),
       body: JSON.stringify({ status: "received" }),
     });
 
